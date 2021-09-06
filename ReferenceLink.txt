@@ -1,0 +1,3 @@
+https://datatables.net/extensions/fixedheader/examples/integration/responsive-bootstrap.html
+https://stackoverflow.com/questions/3507498/reading-csv-files-using-c-sharp
+https://www.c-sharpcorner.com/article/dropdownlist-in-asp-net-mvc/
