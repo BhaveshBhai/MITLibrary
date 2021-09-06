@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        @Html.ActionLink("File Upload and Analysis", "Index", "FileUpload", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+    <div class="col-md-4">
+        @Html.ActionLink("Generate Report", "Index1", "FileUpload", null, new { @class = "btn btn-primary btn-large" })
+    </div>
+    @*<div class="col-md-4">
+        @Html.ActionLink("Don't know", "Index1", "FileUpload", null, new { @class = "btn btn-primary btn-large" })
+    </div>*@
+</div>
