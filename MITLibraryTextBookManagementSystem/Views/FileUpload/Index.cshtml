@@ -4,59 +4,77 @@
 @{
     ViewBag.Title = "Index";
 }
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
 
-@*<script src="~/Scripts/jquery-3.4.1.js"></script>*@
+<link href="~/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+<link href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<link href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet">
+<link href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet">
 <script src="~/Content/DataTables/JS/jquery-3.5.1.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-@*<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />*@
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-@*<script src="~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>*@
-<link href="~/Content/DataTables/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
-@*<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />*@
-@*<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />*@
-<link href="~/Content/DataTables/css/fixedHeader.bootstrap4.min.css" rel="stylesheet" />
-@*<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>*@
-<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
-@*<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>*@
-<script src="~/Scripts/DataTables/dataTables.bootstrap4.min.js"></script>
-<script src="~/Scripts/DataTables/dataTables.fixedHeader.min.js"></script>
-
+<script src="~/Plugins/jquery/jquery.min.js"></script>
+<script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+<script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+<script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+<script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+<script src="~/plugins/jszip/jszip.min.js"></script>
+<script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+<script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+<script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+<script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+<script src="~/Plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
 @using (Html.BeginForm("Index", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+<div class="card-body">
     <div class="form-group">
-        <label for="year" class="col-sm-2 control-label">Select Year</label>
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.yearId, Model.Year, new { @class = "form-control" })
+        <label>Select Year</label>
+        @Html.DropDownListFor(m => m.yearId, Model.Year, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Select Semester</label>
+        @Html.DropDownListFor(m => m.semesterId, Model.Semester, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Select Campus</label>
+        @Html.DropDownListFor(m => m.campusId, Model.Campus, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label for="exampleInputFile">Import File For Unit</label>
+        <div class="input-group">
+            <div class="custom-file">
+                @Html.TextBoxFor(m => m.UnitFile, "", new { @type = "file", @class = "custom-file-input" }) <br />
+                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+            </div>
+            <div class="input-group-append">
+                <span class="input-group-text previewUnit" id="Preview_Unit">Preview</span>
+            </div>
         </div>
     </div>
     <div class="form-group">
-        <label for="Semester" class="col-sm-2 control-label">Select Semester</label>
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.semesterId, Model.Semester, new { @class = "form-control" })
+        <label for="exampleInputFile">Import File For TextBook</label>
+        <div class="input-group">
+            <div class="custom-file">
+                @Html.TextBoxFor(m => m.TextBoxFile, "", new { @type = "file", @class = "custom-file-input" }) <br />
+                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+            </div>
+            <div class="input-group-append">
+                <span class="input-group-text previewUnit" id="Preview_Unit">Preview</span>
+            </div>
         </div>
     </div>
-    <div class="form-group">
-        <label for="Campus" class="col-sm-2 control-label">Select Campus</label>
-        <div class="col-sm-10">
-            @Html.DropDownListFor(m => m.campusId, Model.Campus, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="file" col-sm-2 control-label>File input</label>
-        <div class="col-sm-10">
-            @Html.TextBoxFor(m => m.File, "", new { @type = "file" }) <br />
-        </div>
+</div> <!-- /.card-body -->
 
-        @*<p class="help-block">tblTextBox block-level help text here.</p>*@
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Preview</button>
-        </div>
-    </div>
+
 }
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -66,9 +84,126 @@
                 </button>
             </div>
             <div class="modal-body">
+                @@if (Model.ImportTextBooks != null)
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">DataTable with default features</h3>
+                        </div>-->
+<!-- /.card-header -->
+<!--<div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>UnitCode</th>
+                                        <th>Coordinator</th>
+                                        <th>Author</th>
+                                        <th>Year</th>
+                                        <th>Title</th>
+                                        <th>Publisher</th>
+                                        <th>Identifier</th>
+                                        <th>Requirement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @@foreach (ImportTextBook customer in Model.ImportTextBooks)
+                                    {
+                                        <tr>
+                                            <td>@@customer.UnitCode</td>
+                                            <td>@@customer.Coordinator</td>
+                                            <td>@@customer.Author</td>
+                                            <td>@@customer.Year</td>
+                                            <td>@@customer.Title</td>
+                                            <td>@@customer.Publisher</td>
+                                            <td>@@customer.Identifier</td>
+                                            <td>@@customer.Requirement</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+<div class="modal fade" id="modal-Unit">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:fit-content !important;right:25%">
+            <div class="modal-header">
+                <h4 class="modal-title">TextBok</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @if (Model.ImportUnits != null)
+                {
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>UnitCode</th>
+                                <th>Unit Tile</th>
+                                <th>
+                                    Capacity
+                                </th>
+                                <th>
+                                    Total enrolled
+                                </th>
+                                <th>
+                                    Lab and tut. capacity
+                                </th>
+                                <th>
+                                    Not Running
+                                </th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (ImportUnit customer in Model.ImportUnits)
+                            {
+                                <tr>
+                                    <td>@customer.Unitcode</td>
+                                    <td>@customer.Unit_title</td>
+                                    <td>@customer.Capacity</td>
+                                    <td>@customer.Total_Enrolled</td>
+                                    <td>@customer.Lab_and_tut_capacity</td>
+                                    <td>@customer.Not_Running</td>
+                                    
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width:fit-content !important;right:25%">
+            <div class="modal-header">
+                <h4 class="modal-title">TextBok</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
                 @if (Model.ImportTextBooks != null)
                 {
-                    <table id="tblTextBox" class="table table-striped table-bordered" style="width:100%">
+                    <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>UnitCode</th>
@@ -85,7 +220,7 @@
                             @foreach (ImportTextBook customer in Model.ImportTextBooks)
                             {
                                 <tr>
-                                    <td>@customer.UnitCode</td>
+                                    <td>@customer.Unit_Code</td>
                                     <td>@customer.Coordinator</td>
                                     <td>@customer.Author</td>
                                     <td>@customer.Year</td>
@@ -99,29 +234,51 @@
                     </table>
                 }
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
 </div>
-
 
 
 <script>
     $(document).ready(function () {
         @if(Model.ImportTextBooks != null)
         {
-            @:$("#exampleModal").modal('show');
+            @:$("#modal-default").modal('show');
         }
             else
             {
-                @:$("#exampleModal").modal('hide');
+                @:$("#modal-default").modal('hide');
+            }
+         @if(Model.ImportUnits != null)
+        {
+            @:$("#modal-Unit").modal('show');
+        }
+            else
+            {
+                @:$("#modal-Unit").modal('hide');
             }
         var table = $('#tblTextBox').DataTable({
             fixedHeader: true
         });
+
+        //$(".previewUnit").click(function () {
+        //    alert("calling");
+        //    $("#modal-default").modal('show');
+        //});
     });
+
+$(function () {
+    bsCustomFileInput.init();
+    $("#example1").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+});
 
 </script>

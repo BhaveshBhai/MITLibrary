@@ -14,8 +14,10 @@ namespace MITLibraryTextBookManagementSystem.Models
         public IEnumerable<SelectListItem> Year { get; set; }
         public IEnumerable<SelectListItem> Semester { get; set; }
         public IEnumerable<SelectListItem> Campus { get; set; }
-        public HttpPostedFileBase File { get; set; }
+        public HttpPostedFileBase TextBoxFile { get; set; }
+        public HttpPostedFileBase UnitFile { get; set; }
         public IList<ImportTextBook> ImportTextBooks { get; set; }
+        public IList<ImportUnit> ImportUnits { get; set; }
 
         public IEnumerable<SelectListItem> GetYearsList()
         {

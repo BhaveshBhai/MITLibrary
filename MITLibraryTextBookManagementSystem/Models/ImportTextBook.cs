@@ -7,7 +7,7 @@ namespace MITLibraryTextBookManagementSystem.Models
 {
     public class ImportTextBook
     {
-        public string UnitCode { get; set; }
+        public string Unit_Code { get; set; }
         public string Coordinator { get; set; }
         public string Author { get; set; }
         public string Year { get; set; }
