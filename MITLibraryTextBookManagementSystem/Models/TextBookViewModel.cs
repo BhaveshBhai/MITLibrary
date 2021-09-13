@@ -206,10 +206,10 @@ namespace MITLibraryTextBookManagementSystem.Models
                     foreach (var item in importTextBooks)
                     {
                         var UnitId = importUnit.ReturnUnitId(item.Unit_Code);
-                        var textBook = db.TextBooks.Where(x => x.FileUpload_Id == FileId).FirstOrDefault();
-                        if (textBook == null && UnitId>1)
+                        //var textBook = db.TextBooks.Where(x => x.FileUpload_Id == FileId).FirstOrDefault();
+                        if (UnitId>1)
                         {
-                            textBook = new TextBook();
+                            TextBook textBook = new TextBook();
                             textBook.Campus_Id = campusId;
                             textBook.Year_Id = yearId;
                             textBook.Semesters_Id = semsterId;

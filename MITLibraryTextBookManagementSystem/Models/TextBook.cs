@@ -9,7 +9,6 @@ namespace MITLibraryTextBookManagementSystem.Models
     public partial class TextBook
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int TextBook_Id { get; set; }
 
         public int? TextBook_Year { get; set; }

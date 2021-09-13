@@ -16,13 +16,13 @@ namespace MITLibraryTextBookManagementSystem.Models
         public string Lab_and_tut_capacity { get; set; }
         public string Not_Running {get;set;}
 
-        public List<Unit> GetUnits()
+        public List<TextBook> GetUnits()
         {
             try
             {
                 using (var db = new MITDBContext())
                 {
-                    return db.Units.ToList();
+                    return db.TextBooks.Include("Unit").ToList();
                 }
             }
             catch (Exception ex)

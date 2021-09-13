@@ -1,5 +1,5 @@
 ﻿@using MITLibraryTextBookManagementSystem.Models;
-@model IEnumerable<MITLibraryTextBookManagementSystem.Models.Unit>
+@model IEnumerable<MITLibraryTextBookManagementSystem.Models.TextBook>
 
 @{
     ViewBag.Title = "Index";
@@ -36,34 +36,30 @@
                             <thead>
                                 <tr>
                                     <th>UnitCode</th>
-                                    <th>Unit Tile</th>
-                                    <th>
-                                        Capacity
-                                    </th>
-                                    <th>
-                                        Total enrolled
-                                    </th>
-                                    <th>
-                                        Lab and tut. capacity
-                                    </th>
-                                    <th>
-                                        Not Running
-                                    </th>
-
+                                    <th>Coordinator</th>
+                                    <th>Author</th>
+                                    <th>Year</th>
+                                    <th>Title</th>
+                                    <th>Publisher</th>
+                                    <th>Identifier</th>
+                                    <th>Requirement</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (Unit customer in Model)
+                                @foreach (TextBook customer in Model)
                                 {
-                                    <tr>
-                                        <td>@customer.Unit_Code</td>
-                                        <td>@customer.Unit_Title</td>
-                                        <td>@customer.Capacity</td>
-                                        <td>@customer.Total_Enrollment</td>
-                                        <td>@customer.Lab_and_tut_capacity</td>
-                                        <td>@customer.RunningOrNot</td>
+                                <tr>
+                                    <td>@customer.Unit.Unit_Code</td>
+                                    <td>@customer.Coordinator_Name</td>
+                                    <td>@customer.Author</td>
+                                    <td>@customer.Author</td>
+                                    <td>@customer.TextBook_Year</td>
+                                    <td>@customer.Title</td>
+                                    <td>@customer.Publisher</td>
+                                    <td>@customer.Identifier</td>
+                                    <td>@customer.Requirement</td>
 
-                                    </tr>
+                                </tr>
                                 }
                             </tbody>
                         </table>
