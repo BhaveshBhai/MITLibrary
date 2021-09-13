@@ -1,0 +1,72 @@
+﻿@using MITLibraryTextBookManagementSystem.Models;
+@model MITLibraryTextBookManagementSystem.Models.TextBookViewModel
+
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content" style="width:fit-content !important;right:25%">
+        <div class="modal-header">
+            <h4 class="modal-title">Unit</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            @if (Model.ImportUnits != null)
+            {
+                <table id="tblUnit" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>UnitCode</th>
+                            <th>Unit Tile</th>
+                            <th>
+                                Capacity
+                            </th>
+                            <th>
+                                Total enrolled
+                            </th>
+                            <th>
+                                Lab and tut. capacity
+                            </th>
+                            <th>
+                                Not Running
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (ImportUnit customer in Model.ImportUnits)
+                        {
+                            <tr>
+                                <td>@customer.Unitcode</td>
+                                <td>@customer.Unit_title</td>
+                                <td>@customer.Capacity</td>
+                                <td>@customer.Total_Enrolled</td>
+                                <td>@customer.Lab_and_tut_capacity</td>
+                                <td>@customer.Not_Running</td>
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+        <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal" id="btncloseUnit">Close</button>
+            <button type="button" class="btn btn-primary">UnitData</button>
+        </div>
+    </div>
+    <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->
+<script>
+    $(function () {
+        $('#btncloseUnit').on('click', function () {
+            alert("btn click event");
+            $("#UnitFile").val();
+            $("#modal-Unit").modal('hide');
+        })
+    });
+</script>

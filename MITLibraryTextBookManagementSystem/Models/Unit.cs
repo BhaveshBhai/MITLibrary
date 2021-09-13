@@ -12,6 +12,7 @@ namespace MITLibraryTextBookManagementSystem.Models
         public Unit()
         {
             Coordinators = new HashSet<Coordinator>();
+            TextBooks = new HashSet<TextBook>();
         }
 
         [Key]
@@ -31,9 +32,14 @@ namespace MITLibraryTextBookManagementSystem.Models
 
         public bool? RunningOrNot { get; set; }
 
+        public int? Lab_and_tut_capacity { get; set; }
+
         public virtual Campus Campus { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Coordinator> Coordinators { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TextBook> TextBooks { get; set; }
     }
 }

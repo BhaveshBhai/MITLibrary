@@ -29,8 +29,6 @@ namespace MITLibraryTextBookManagementSystem.Models
         [StringLength(250)]
         public string Requirement { get; set; }
 
-        public int? Coordinator_Id { get; set; }
-
         public int? Semesters_Id { get; set; }
 
         public int? Year_Id { get; set; }
@@ -39,13 +37,17 @@ namespace MITLibraryTextBookManagementSystem.Models
 
         public int? FileUpload_Id { get; set; }
 
-        public virtual Campus Campus { get; set; }
+        public string Coordinator_Name { get; set; }
 
-        public virtual Coordinator Coordinator { get; set; }
+        public int? Unit_Id { get; set; }
+
+        public virtual Campus Campus { get; set; }
 
         public virtual FileUpload FileUpload { get; set; }
 
         public virtual Semester Semester { get; set; }
+
+        public virtual Unit Unit { get; set; }
 
         public virtual Year Year { get; set; }
     }

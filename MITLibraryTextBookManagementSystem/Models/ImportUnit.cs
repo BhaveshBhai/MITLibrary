@@ -16,6 +16,34 @@ namespace MITLibraryTextBookManagementSystem.Models
         public string Lab_and_tut_capacity { get; set; }
         public string Not_Running {get;set;}
 
+        public List<Unit> GetUnits()
+        {
+            try
+            {
+                using (var db = new MITDBContext())
+                {
+                    return db.Units.ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public int ReturnUnitId(string Unit_Code)
+        {
+            try
+            {
+                using (var db = new MITDBContext())
+                {
+                    return db.Units.Where(x=>x.Unit_Code==Unit_Code).Select(x=>x.Unit_Id).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
     }
     public sealed class ImportUnitMap : ClassMap<ImportUnit>
     {
@@ -30,4 +58,5 @@ namespace MITLibraryTextBookManagementSystem.Models
             Map(m => m.Not_Running).Name("Not Running");
         }
     }
+
 }

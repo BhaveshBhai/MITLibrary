@@ -157,6 +157,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -256,6 +257,14 @@
     <Content Include="Plugins\pdfmake\pdfmake.js" />
     <Content Include="Plugins\pdfmake\pdfmake.min.js" />
     <Content Include="Plugins\pdfmake\vfs_fonts.js" />
+    <Content Include="Plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.css" />
+    <Content Include="Plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.min.css" />
+    <Content Include="Plugins\sweetalert2\sweetalert2.all.js" />
+    <Content Include="Plugins\sweetalert2\sweetalert2.all.min.js" />
+    <Content Include="Plugins\sweetalert2\sweetalert2.css" />
+    <Content Include="Plugins\sweetalert2\sweetalert2.js" />
+    <Content Include="Plugins\sweetalert2\sweetalert2.min.css" />
+    <Content Include="Plugins\sweetalert2\sweetalert2.min.js" />
     <Content Include="Scripts\AdminLTE\adminlte.js" />
     <Content Include="Scripts\AdminLTE\adminlte.min.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -415,10 +424,14 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\FileUpload\_Units.cshtml" />
+    <Content Include="Views\FileUpload\FileUploadIndex.cshtml" />
+    <Content Include="Views\Unit\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="UploadFile\" />
+    <Folder Include="Views\FileUpload\Partial\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -8,12 +8,6 @@ namespace MITLibraryTextBookManagementSystem.Models
 
     public partial class Coordinator
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Coordinator()
-        {
-            TextBooks = new HashSet<TextBook>();
-        }
-
         [Key]
         public int Coordinator_Id { get; set; }
 
@@ -23,8 +17,5 @@ namespace MITLibraryTextBookManagementSystem.Models
         public int? Unit_Id { get; set; }
 
         public virtual Unit Unit { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TextBook> TextBooks { get; set; }
     }
 }

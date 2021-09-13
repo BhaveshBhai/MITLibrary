@@ -1,0 +1,84 @@
+﻿@using MITLibraryTextBookManagementSystem.Models;
+@model IEnumerable<MITLibraryTextBookManagementSystem.Models.Unit>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Text Book Details</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                    <li class="breadcrumb-item active">Text Book Details</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Text Book Details</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="tbllstUnits" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>UnitCode</th>
+                                    <th>Unit Tile</th>
+                                    <th>
+                                        Capacity
+                                    </th>
+                                    <th>
+                                        Total enrolled
+                                    </th>
+                                    <th>
+                                        Lab and tut. capacity
+                                    </th>
+                                    <th>
+                                        Not Running
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (Unit customer in Model)
+                                {
+                                    <tr>
+                                        <td>@customer.Unit_Code</td>
+                                        <td>@customer.Unit_Title</td>
+                                        <td>@customer.Capacity</td>
+                                        <td>@customer.Total_Enrollment</td>
+                                        <td>@customer.Lab_and_tut_capacity</td>
+                                        <td>@customer.RunningOrNot</td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(function () {
+
+        $("#tbllstUnits").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tbllstUnits_wrapper .col-md-6:eq(0)');
+    });
+</script>
