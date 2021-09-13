@@ -75,5 +75,19 @@ namespace MITLibraryTextBookManagementSystem.Models
                 return null;
             }
         }
+        public List<User> GetUsers()
+        {
+            try
+            {
+                using (var db = new MITDBContext())
+                {
+                    return db.Users.Include("Role").ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
     }
 }

@@ -9,6 +9,11 @@ namespace MITLibraryTextBookManagementSystem.Controllers
 {
     public class UserController : Controller
     {
+        public ActionResult Index()
+        {
+            UserModel userModel = new UserModel();
+            return View(userModel.GetUsers());
+        }
         // GET: User
         public ActionResult Registration()
         {
