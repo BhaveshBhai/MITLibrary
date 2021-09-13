@@ -1,6 +1,6 @@
 USE [master]
 GO
-/****** Object:  Database [MITDB]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Database [MITDB]    Script Date: 14/09/2021 12:38:21 AM ******/
 
 ALTER DATABASE [MITDB] SET COMPATIBILITY_LEVEL = 150
 GO
@@ -73,7 +73,7 @@ ALTER DATABASE [MITDB] SET QUERY_STORE = OFF
 GO
 USE [MITDB]
 GO
-/****** Object:  Table [dbo].[Campuses]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[Campuses]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -87,7 +87,7 @@ CREATE TABLE [dbo].[Campuses](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Coordinators]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[Coordinators]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -102,7 +102,7 @@ CREATE TABLE [dbo].[Coordinators](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FileUploads]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[FileUploads]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +118,7 @@ CREATE TABLE [dbo].[FileUploads](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -132,7 +132,7 @@ CREATE TABLE [dbo].[Roles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Semesters]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[Semesters]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,7 +146,7 @@ CREATE TABLE [dbo].[Semesters](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TextBooks]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[TextBooks]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,7 +171,7 @@ CREATE TABLE [dbo].[TextBooks](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Units]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[Units]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -191,7 +191,7 @@ CREATE TABLE [dbo].[Units](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -209,7 +209,7 @@ CREATE TABLE [dbo].[Users](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Years]    Script Date: 13/09/2021 11:12:26 PM ******/
+/****** Object:  Table [dbo].[Years]    Script Date: 14/09/2021 12:38:21 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -259,7 +259,7 @@ INSERT [dbo].[Roles] ([Role_Id], [Role_Name]) VALUES (1, N'Super Admin')
 GO
 INSERT [dbo].[Roles] ([Role_Id], [Role_Name]) VALUES (2, N'Course Coordinator')
 GO
-INSERT [dbo].[Roles] ([Role_Id], [Role_Name]) VALUES (3, N'User')
+INSERT [dbo].[Roles] ([Role_Id], [Role_Name]) VALUES (3, N'Library Staff')
 GO
 SET IDENTITY_INSERT [dbo].[Roles] OFF
 GO
@@ -275,11 +275,7 @@ SET IDENTITY_INSERT [dbo].[Semesters] OFF
 GO
 SET IDENTITY_INSERT [dbo].[Users] ON 
 GO
-INSERT [dbo].[Users] ([User_Id], [UserName], [Password], [FirstName], [LastName], [Role_Id]) VALUES (1, N'osi.kinjal@gmail.com', N'Kinjal@143', N'Kinjal', N'Lahar', 1)
-GO
-INSERT [dbo].[Users] ([User_Id], [UserName], [Password], [FirstName], [LastName], [Role_Id]) VALUES (2, N'bhvesh@mit.edu.au', N'Bhavesh@143', N'BhaveshBhai', N'Narola', 3)
-GO
-INSERT [dbo].[Users] ([User_Id], [UserName], [Password], [FirstName], [LastName], [Role_Id]) VALUES (3, N'bhavesh@mit.edu.au', N'Bhavesh@143', N'bhavesh', N'narola', 3)
+INSERT [dbo].[Users] ([User_Id], [UserName], [Password], [FirstName], [LastName], [Role_Id]) VALUES (1, N'kinjal@mit.edu.au', N'Kinjal@143', N'Kinjal', N'Lahar', 1)
 GO
 SET IDENTITY_INSERT [dbo].[Users] OFF
 GO

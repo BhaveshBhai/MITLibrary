@@ -14,7 +14,7 @@
     @using (Html.BeginForm("Registration", "User", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         <div class="register-box">
             <div class="register-logo">
                 <a href="#"><b>MIT</b>Library</a>
@@ -74,13 +74,13 @@
                     </div>
                     <div class="row">
                         @*<div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                <label for="agreeTerms">
-                                    I agree to the <a href="#">terms</a>
-                                </label>
-                            </div>
-                        </div>*@
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                    <label for="agreeTerms">
+                                        I agree to the <a href="#">terms</a>
+                                    </label>
+                                </div>
+                            </div>*@
                         <!-- /.col -->
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
