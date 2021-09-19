@@ -117,11 +117,13 @@ C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Antlr3.Runtime.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\CsvHelper.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\EntityFramework.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\EntityFramework.SqlServer.dll
+C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\LINQtoCSV.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Microsoft.Bcl.AsyncInterfaces.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Microsoft.Bcl.HashCode.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Microsoft.Web.Infrastructure.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Newtonsoft.Json.dll
+C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\ServiceStack.Text.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Buffers.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Memory.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Net.Http.Formatting.dll
@@ -143,6 +145,7 @@ C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Microsoft.Bcl.AsyncInte
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Microsoft.Bcl.HashCode.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Newtonsoft.Json.xml
+C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\ServiceStack.Text.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Buffers.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Memory.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Net.Http.Formatting.xml
@@ -157,8 +160,8 @@ C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Web.WebPages.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Web.WebPages.Deployment.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Web.WebPages.Razor.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Antlr3.Runtime.pdb
-C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.csprojAssemblyReference.cache
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.csproj.CoreCompileInputs.cache
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.csproj.CopyComplete
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.pdb
+C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.csprojAssemblyReference.cache

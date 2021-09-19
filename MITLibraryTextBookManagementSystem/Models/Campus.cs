@@ -12,6 +12,7 @@ namespace MITLibraryTextBookManagementSystem.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Campus()
         {
+            AumltInventors = new HashSet<AumltInventor>();
             TextBooks = new HashSet<TextBook>();
             Units = new HashSet<Unit>();
         }
@@ -21,6 +22,9 @@ namespace MITLibraryTextBookManagementSystem.Models
 
         [StringLength(50)]
         public string Campus_Name { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AumltInventor> AumltInventors { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TextBook> TextBooks { get; set; }

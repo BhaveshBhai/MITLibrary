@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAzzr5/wEDQkOd/54pEj9ilgAAAAACAAAAAAAQZgAAAAEAACAAAAAy7z73ANyRg0Kv56y48zzQiqg+0+jrk6LvPtmQcB3X8wAAAAAOgAAAAAIAACAAAADbOIZAVYNWxGJhOYzhqr+A7C4t+bXErjRDXI2NTrOdwyAAAADciLMj19oTcBFfTKmFNwvoZDEiTRt7ny8rR7I7yTIr3EAAAADro/6RQSnUXPx6zPlh8bgxl24H6U0HbmOL8LIPNwuZx7AdISdhMmv8UW/xODBNbK5soKhRKNZtFh6YdGXNbxg0</EncryptedPassword>
+    <_PublishTargetUrl>http://mitlibrary.somee.com/d:\DZHosts\LocalUser\narola90\www.MITLibrary.somee.com</_PublishTargetUrl>
+    <History>False|2021-09-19T08:58:21.0154435Z;</History>
+  </PropertyGroup>
+</Project>

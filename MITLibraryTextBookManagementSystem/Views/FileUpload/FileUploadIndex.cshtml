@@ -33,6 +33,7 @@
     @Html.HiddenFor(x => x.ImportUnit, new { id = "ImportUnit" });
     @Html.HiddenFor(x => x.ImportTextBooks, new { id = "ImportTextBooks" });
     @Html.HiddenFor(x => x.JsonImportTextBook, new { id = "JsonImportTextBook" });
+    @Html.HiddenFor(x => x.ImportInventor, new { id = "ImportInventor" });
 
     <div class="card-body">
         <div class="form-group">
@@ -68,6 +69,18 @@
                 </div>
                 <div class="input-group-append">
                     <span class="input-group-text previewTextBox" id="Preview_TextBox">Preview</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Import File For Inventor</label>
+            <div class="input-group">
+                <div class="custom-file">
+                    @Html.TextBoxFor(m => m.InventorFile, "", new { @type = "file", @class = "custom-file-input" }) <br />
+                    <label class="custom-file-label" for="">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <span class="input-group-text previewInventor" id="Preview_Inventor">Preview</span>
                 </div>
             </div>
         </div>
@@ -157,6 +170,60 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <div class="modal fade" id="modal-Inventor">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:fit-content !important;right:25%">
+                <div class="modal-header">
+                    <h4 class="modal-title">Inventor</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <table id="tblInventor" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Institution Symbol
+                                </th>
+                                <th>
+                                    Item Holding Location
+                                </th>
+                                <th>
+                                    Material Format
+
+                                </th>
+                                <th>
+                                    OCLC_Number
+
+                                </th>
+                                <th>
+                                    Publication_Date
+
+                                </th>
+                                <th>
+                                    Item_Barcode
+
+                                </th>
+                                <th>
+                                    Item_Status_Current_Status
+
+                                </th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Use this file</button>
+                    <button type="button" class="btn btn-primary" onclick="InventorModelClose()" data-dismiss="modal">Upload Differnt file?</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
 }
 
 <div>
@@ -184,6 +251,14 @@
             else
             {
                 @:$("#modal-Unit").modal('hide');
+            }
+          @if(Model.ImportInventors != null)
+        {
+            @:$("#modal-inventor").modal('show');
+        }
+            else
+            {
+                @:$("#modal-Inventor").modal('hide');
             }
 
         $(".previewUnit").click(function () {
@@ -237,11 +312,11 @@
             });
         });
 
-         $(".previewTextBox").click(function () {
+        $(".previewTextBox").click(function () {
              var formData = new FormData();
              formData.append('file', $('#TextBoxFile')[0].files[0]);
              $.ajax({
-                 url: '/FileUpload/getTextBookData',
+                 url: '/FileUpload/getInventorData',
                  type: 'POST',
                  data: formData,
                  processData: false,  // tell jQuery not to process the data
@@ -251,8 +326,8 @@
                      var objTextBookJson = jQuery.parseJSON(data.TextBookData);
 
                      //var DataList = {};
-                     document.getElementById("JsonImportTextBook").value = data.TextBookData;
-                     var oTblReport = $("#tblTextBook");
+                     document.getElementById("ImportInventor").value = data.TextBookData;
+                     var oTblReport = $("#tblInventor");
 
                      oTblReport.DataTable({
                          "data": objTextBookJson,
@@ -270,7 +345,61 @@
                          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
                      }).buttons().container().appendTo('#tblTextBook_wrapper .col-md-6:eq(0)');
 
-                     $("#modal-TextBook").modal('show');
+                     $("#modal-Inventor").modal('show');
+
+                 },
+                 failure: function (response) {
+                     $(document).Toasts('create', {
+                         class: 'bg-danger',
+                         title: 'Invalid Header',
+                         body: response.responseJSON
+                     })
+                 },
+                 error: function (response) {
+
+                     $(document).Toasts('create', {
+                         class: 'bg-danger',
+                         title: 'Invalid Header',
+                         body: response.responseJSON
+                     })
+                 }
+             });
+        });
+
+         $(".previewInventor").click(function () {
+             var formData = new FormData();
+             formData.append('file', $('#InventorFile')[0].files[0]);
+             $.ajax({
+                 url: '/FileUpload/getInventorData',
+                 type: 'POST',
+                 data: formData,
+                 processData: false,
+                 contentType: false,
+                 async: false,
+                 success: function (response) {
+                     console.log(response.InventorData);
+                     var objInventorJson = jQuery.parseJSON(response.InventorData);
+
+                     //var DataList = {};
+                     document.getElementById("ImportInventor").value = response.InventorData;
+                     var oTblReport = $("#tblInventor");
+
+                     oTblReport.DataTable({
+                         "data": objInventorJson,
+                         "columns": [
+                             { "data": "Institution_Symbol" },
+                             { "data": "Item_Holding_Location" },
+                             { "data": "Material_Format" },
+                             { "data": "OCLC_Number" },
+                             { "data": "Publication_Date" },
+                             { "data": "Item_Barcode" },
+                             { "data": "Item_Status_Current_Status" }
+                         ],
+                         "responsive": true, "lengthChange": false, "autoWidth": false,
+                         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                     }).buttons().container().appendTo('#tblTextBook_wrapper .col-md-6:eq(0)');
+
+                     $("#modal-Inventor").modal('show');
 
                  },
                  failure: function (response) {
@@ -290,7 +419,6 @@
                  }
              });
          });
-
     });
 
 $(function () {

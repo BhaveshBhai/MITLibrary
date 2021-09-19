@@ -5,27 +5,7 @@
     ViewBag.Title = "FileUploadIndex";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@*<link href="~/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-    <link href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css" rel="stylesheet">
-    <link href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css" rel="stylesheet">
-    <link href="~/Plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" />
-    <script src="~/Content/DataTables/JS/jquery-3.5.1.js"></script>
-    <script src="~/Plugins/jquery/jquery.min.js"></script>
-    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-    <script src="~/plugins/jszip/jszip.min.js"></script>
-    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
-    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
-    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
-    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-    <script src="~/Plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
-    <script src="~/Plugins/sweetalert2/sweetalert2.min.js"></script>*@
+
 @using (Html.BeginForm("Index", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
@@ -33,6 +13,8 @@
     @Html.HiddenFor(x => x.ImportUnit, new { id = "ImportUnit" });
     @Html.HiddenFor(x => x.ImportTextBooks, new { id = "ImportTextBooks" });
     @Html.HiddenFor(x => x.JsonImportTextBook, new { id = "JsonImportTextBook" });
+    @Html.HiddenFor(x => x.ImportInventor, new { id = "ImportInventor" });
+
 
     <div class="card-body">
         <div class="form-group">
@@ -68,6 +50,18 @@
                 </div>
                 <div class="input-group-append">
                     <span class="input-group-text previewTextBox" id="Preview_TextBox">Preview</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">Import File For Inventor</label>
+            <div class="input-group">
+                <div class="custom-file">
+                    @Html.TextBoxFor(m => m.InventorFile, "", new { @type = "file", @class = "custom-file-input" }) <br />
+                    <label class="custom-file-label" for="">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <span class="input-group-text previewInventor" id="Preview_Inventor">Preview</span>
                 </div>
             </div>
         </div>
@@ -157,6 +151,60 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <div class="modal fade" id="modal-Inventor">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:fit-content !important;right:25%">
+                <div class="modal-header">
+                    <h4 class="modal-title">Inventor</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <table id="tblInventor" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Institution Symbol
+                                </th>
+                                <th>
+                                    Item Holding Location
+                                </th>
+                                <th>
+                                    Material Format
+
+                                </th>
+                                <th>
+                                    OCLC_Number
+
+                                </th>
+                                <th>
+                                    Publication_Date
+
+                                </th>
+                                <th>
+                                    Item_Barcode
+
+                                </th>
+                                <th>
+                                    Item_Status_Current_Status
+
+                                </th>
+                            </tr>
+                        </thead>
+
+                    </table>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Use this file</button>
+                    <button type="button" class="btn btn-primary" onclick="InventorModelClose()" data-dismiss="modal">Upload Differnt file?</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+    </div>
 }
 
 <div>
@@ -185,7 +233,14 @@
             {
                 @:$("#modal-Unit").modal('hide');
             }
-
+         @if(Model.ImportInventors != null)
+        {
+            @:$("#modal-inventor").modal('show');
+        }
+            else
+            {
+                @:$("#modal-Inventor").modal('hide');
+            }
         $(".previewUnit").click(function () {
             var formData = new FormData();
             formData.append('file', $('#UnitFile')[0].files[0]);
@@ -290,7 +345,59 @@
                  }
              });
          });
+         $(".previewInventor").click(function () {
+             var formData = new FormData();
+             formData.append('file', $('#InventorFile')[0].files[0]);
+             $.ajax({
+                 url: '/FileUpload/getInventorData',
+                 type: 'POST',
+                 data: formData,
+                 processData: false,
+                 contentType: false,
+                 async: false,
+                 success: function (response) {
+                     console.log(response.InventorData);
+                     var objInventorJson = jQuery.parseJSON(response.InventorData);
 
+                     //var DataList = {};
+                     document.getElementById("ImportInventor").value = response.InventorData;
+                     var oTblReport = $("#tblInventor");
+
+                     oTblReport.DataTable({
+                         "data": objInventorJson,
+                         "columns": [
+                             { "data": "Institution_Symbol" },
+                             { "data": "Item_Holding_Location" },
+                             { "data": "Material_Format" },
+                             { "data": "OCLC_Number" },
+                             { "data": "Publication_Date" },
+                             { "data": "Item_Barcode" },
+                             { "data": "Item_Status_Current_Status" }
+                         ],
+                         "responsive": true, "lengthChange": false, "autoWidth": false,
+                         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                     }).buttons().container().appendTo('#tblTextBook_wrapper .col-md-6:eq(0)');
+
+                     $("#modal-Inventor").modal('show');
+
+                 },
+                 failure: function (response) {
+                     $(document).Toasts('create', {
+                         class: 'bg-danger',
+                         title: 'Invalid Header',
+                         body: response.responseJSON
+                     })
+                 },
+                 error: function (response) {
+
+                     $(document).Toasts('create', {
+                         class: 'bg-danger',
+                         title: 'Invalid Header',
+                         body: response.responseJSON
+                     })
+                 }
+             });
+         });
     });
 
 $(function () {
@@ -307,5 +414,10 @@ $(function () {
     function textBookModelClose() {
         $("#modal-TextBook").modal('hide');
         $("#TextBoxFile").click();
+    };
+
+    function InventorModelClose() {
+        $("#modal-Inventor").modal('hide');
+        $("#InventorFile").click();
     };
 </script>

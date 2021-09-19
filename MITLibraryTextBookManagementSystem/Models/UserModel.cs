@@ -48,16 +48,16 @@ namespace MITLibraryTextBookManagementSystem.Models
                 throw;
             }
         }
-        public bool Login(User user)
+        public int Login(User user)
         {
             try
             {
                 var userdetails = CheckUserName(user.UserName);
-             return   userdetails != null ? (userdetails.Password == user.Password ? true : false) : false;
+             return   userdetails != null ? (userdetails.Password == user.Password ? userdetails.Role_Id.Value : 0) : 0;
             }
             catch (Exception ex)
             {
-                return false;
+                return 0;
             }
         }
         public User CheckUserName(string UserName)
@@ -66,7 +66,7 @@ namespace MITLibraryTextBookManagementSystem.Models
             {
                 using (var db = new MITDBContext())
                 {
-                 return   db.Users.Where(x => x.UserName == UserName).FirstOrDefault();
+                 return db.Users.Where(x => x.UserName == UserName).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -89,5 +89,6 @@ namespace MITLibraryTextBookManagementSystem.Models
                 return null;
             }
         }
+        
     }
 }

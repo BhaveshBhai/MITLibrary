@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MITLibraryTextBookManagementSystem.Controllers
 {
@@ -15,10 +16,12 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             return View(userModel.GetUsers());
         }
         // GET: User
+        [AllowAnonymous]
         public ActionResult Registration()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Registration(User user)
         {
@@ -39,17 +42,32 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             }
             return View("Login");
         }
+        [AllowAnonymous]
         public ActionResult Login()
         {
             return View();
         }
+        [AllowAnonymous]
         [HttpPost]
         public ActionResult Login(User user)
         {
             UserModel userModel = new UserModel();
-            if (userModel.Login(user))
+            var roleId = userModel.Login(user);
+            if (roleId > 0)
             {
-                return RedirectToAction("Index", "Home");
+                this.Session["role_id"] = roleId;
+                if (roleId == 1)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else if (roleId == 2)
+                {
+                    return RedirectToAction("Index", "Unit");
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Unit");
+                }
             }
             else
             {

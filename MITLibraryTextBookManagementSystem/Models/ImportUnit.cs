@@ -1,6 +1,8 @@
 ﻿using CsvHelper.Configuration;
+using LINQtoCSV;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,11 +10,16 @@ namespace MITLibraryTextBookManagementSystem.Models
 {
     public class ImportUnit
     {
+        
         public string SNo { get; set; }
+        [RegularExpression(@"/^[A-Za-z]{2}/")]
         public string Unitcode { get; set; }
         public string Unit_title { get; set; }
+        [RegularExpression(@"^[0-9]+$")]
         public string Capacity { get; set; }
+        [RegularExpression(@"^[0-9]+$")]
         public string Total_Enrolled { get; set; }
+        [RegularExpression(@"^[0-9]+$")]
         public string Lab_and_tut_capacity { get; set; }
         public string Not_Running {get;set;}
 
