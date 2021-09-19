@@ -1,6 +1,3 @@
-USE [master]
-GO
-/****** Object:  Database [MITDB]    Script Date: 14/09/2021 12:38:21 AM ******/
 
 ALTER DATABASE [MITDB] SET COMPATIBILITY_LEVEL = 150
 GO
@@ -73,7 +70,26 @@ ALTER DATABASE [MITDB] SET QUERY_STORE = OFF
 GO
 USE [MITDB]
 GO
-/****** Object:  Table [dbo].[Campuses]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[AumltInventors]    Script Date: 19/09/2021 7:50:59 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[AumltInventors](
+	[AUMLTInventor_Id] [int] IDENTITY(1,1) NOT NULL,
+	[OCLC_Number] [numeric](18, 0) NULL,
+	[Item_Barcode] [nvarchar](max) NULL,
+	[TextBookId] [int] NULL,
+	[Unit_Id] [int] NULL,
+	[Campus_Id] [int] NULL,
+	[Inventor_FileUpload_Id] [int] NULL,
+ CONSTRAINT [PK_AumltInventors] PRIMARY KEY CLUSTERED 
+(
+	[AUMLTInventor_Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Campuses]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -87,7 +103,7 @@ CREATE TABLE [dbo].[Campuses](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Coordinators]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[Coordinators]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -102,7 +118,7 @@ CREATE TABLE [dbo].[Coordinators](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[FileUploads]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[FileUploads]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -112,13 +128,14 @@ CREATE TABLE [dbo].[FileUploads](
 	[File_Name] [nvarchar](50) NULL,
 	[Location] [nvarchar](50) NULL,
 	[User_Id] [int] NULL,
+	[DateTime] [datetime] NULL,
  CONSTRAINT [PK_FileUploads] PRIMARY KEY CLUSTERED 
 (
 	[File_Upload_Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Roles]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[Roles]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -132,7 +149,7 @@ CREATE TABLE [dbo].[Roles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Semesters]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[Semesters]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -146,7 +163,7 @@ CREATE TABLE [dbo].[Semesters](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[TextBooks]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[TextBooks]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -171,7 +188,7 @@ CREATE TABLE [dbo].[TextBooks](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Units]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[Units]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -191,7 +208,7 @@ CREATE TABLE [dbo].[Units](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[Users]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -209,7 +226,7 @@ CREATE TABLE [dbo].[Users](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Years]    Script Date: 14/09/2021 12:38:21 AM ******/
+/****** Object:  Table [dbo].[Years]    Script Date: 19/09/2021 7:50:59 PM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -225,9 +242,10 @@ CREATE TABLE [dbo].[Years](
 GO
 SET IDENTITY_INSERT [dbo].[Campuses] ON 
 GO
-INSERT [dbo].[Campuses] ([Campus_id], [Campus_Name]) VALUES (1, N'Melbourne')
+INSERT [dbo].[Campuses] ([Campus_id], [Campus_Name]) VALUES (1, N'MITM
+')
 GO
-INSERT [dbo].[Campuses] ([Campus_id], [Campus_Name]) VALUES (2, N'Sydney')
+INSERT [dbo].[Campuses] ([Campus_id], [Campus_Name]) VALUES (2, N'MITS')
 GO
 INSERT [dbo].[Campuses] ([Campus_id], [Campus_Name]) VALUES (3, N'Both')
 GO
@@ -235,21 +253,21 @@ SET IDENTITY_INSERT [dbo].[Campuses] OFF
 GO
 SET IDENTITY_INSERT [dbo].[FileUploads] ON 
 GO
-INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id]) VALUES (61, N'Book1.csv', N'UploadFile', 1)
+INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id], [DateTime]) VALUES (61, N'Book1.csv', N'UploadFile', 1, NULL)
 GO
-INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id]) VALUES (62, N'Book1.csv', N'UploadFile', 1)
+INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id], [DateTime]) VALUES (62, N'Book1.csv', N'UploadFile', 1, NULL)
 GO
-INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id]) VALUES (63, N'Book1.csv', N'UploadFile', 1)
+INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id], [DateTime]) VALUES (63, N'Book1.csv', N'UploadFile', 1, NULL)
 GO
-INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id]) VALUES (64, N'Book1.csv', N'UploadFile', 1)
+INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id], [DateTime]) VALUES (64, N'Book1.csv', N'UploadFile', 1, NULL)
 GO
-INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id]) VALUES (65, N'Book1.csv', N'UploadFile', 1)
+INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id], [DateTime]) VALUES (65, N'Book1.csv', N'UploadFile', 1, NULL)
 GO
-INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id]) VALUES (66, N'Book1.csv', N'UploadFile', 1)
+INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id], [DateTime]) VALUES (66, N'Book1.csv', N'UploadFile', 1, NULL)
 GO
-INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id]) VALUES (67, N'Book1.csv', N'UploadFile', 1)
+INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id], [DateTime]) VALUES (67, N'Book1.csv', N'UploadFile', 1, NULL)
 GO
-INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id]) VALUES (68, N'Book1.csv', N'UploadFile', 1)
+INSERT [dbo].[FileUploads] ([File_Upload_Id], [File_Name], [Location], [User_Id], [DateTime]) VALUES (68, N'Book1.csv', N'UploadFile', 1, NULL)
 GO
 SET IDENTITY_INSERT [dbo].[FileUploads] OFF
 GO
@@ -288,6 +306,26 @@ GO
 INSERT [dbo].[Years] ([Year_Id], [Year_Name]) VALUES (3, N'2022')
 GO
 SET IDENTITY_INSERT [dbo].[Years] OFF
+GO
+ALTER TABLE [dbo].[AumltInventors]  WITH CHECK ADD  CONSTRAINT [FK_AumltInventors_Campuses] FOREIGN KEY([Campus_Id])
+REFERENCES [dbo].[Campuses] ([Campus_id])
+GO
+ALTER TABLE [dbo].[AumltInventors] CHECK CONSTRAINT [FK_AumltInventors_Campuses]
+GO
+ALTER TABLE [dbo].[AumltInventors]  WITH CHECK ADD  CONSTRAINT [FK_AumltInventors_FileUploads] FOREIGN KEY([Inventor_FileUpload_Id])
+REFERENCES [dbo].[FileUploads] ([File_Upload_Id])
+GO
+ALTER TABLE [dbo].[AumltInventors] CHECK CONSTRAINT [FK_AumltInventors_FileUploads]
+GO
+ALTER TABLE [dbo].[AumltInventors]  WITH CHECK ADD  CONSTRAINT [FK_AumltInventors_TextBooks] FOREIGN KEY([TextBookId])
+REFERENCES [dbo].[TextBooks] ([TextBook_Id])
+GO
+ALTER TABLE [dbo].[AumltInventors] CHECK CONSTRAINT [FK_AumltInventors_TextBooks]
+GO
+ALTER TABLE [dbo].[AumltInventors]  WITH CHECK ADD  CONSTRAINT [FK_AumltInventors_Units] FOREIGN KEY([Unit_Id])
+REFERENCES [dbo].[Units] ([Unit_Id])
+GO
+ALTER TABLE [dbo].[AumltInventors] CHECK CONSTRAINT [FK_AumltInventors_Units]
 GO
 ALTER TABLE [dbo].[Coordinators]  WITH CHECK ADD  CONSTRAINT [FK_Coordinators_Units] FOREIGN KEY([Unit_Id])
 REFERENCES [dbo].[Units] ([Unit_Id])
