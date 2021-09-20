@@ -40,6 +40,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                 userModel.Password = user.Password;
                 userModel.ConfirmPassword = user.Password;
                 userModel.UserName = user.UserName;
+                userModel.RoleName = userModel.getUserRole();
                 ModelState.AddModelError("", "UserName already taken");
                 return View(userModel);
             }
