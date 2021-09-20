@@ -72,6 +72,15 @@
                         </div>
                         @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error" })
                     </div>
+                    <div class="input-group-append">
+                        @Html.DropDownListFor(m => m.Role_Id, Model.RoleName, new { @class = "form-control" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class=""></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "error" })
+                    </div>
                     <div class="row">
                         @*<div class="col-8">
                                 <div class="icheck-primary">

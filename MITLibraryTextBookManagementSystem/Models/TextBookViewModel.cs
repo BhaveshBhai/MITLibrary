@@ -232,7 +232,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                 StreamReader streamReader = new StreamReader(stream);
                 CsvReader csvReader = new CsvReader(streamReader, csvConfiguration);
                 csvReader.Context.RegisterClassMap<ImportInventorMap>();
-                UnitDetails = csvReader.GetRecords<ImportInventor>().ToList().Where(x=>x.Material_Format=="Book").ToList();
+                UnitDetails = csvReader.GetRecords<ImportInventor>().ToList();
                 streamReader.Close();
                 streamReader.Dispose();
                 foreach (var item in UnitDetails)

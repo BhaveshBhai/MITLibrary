@@ -13,13 +13,16 @@ namespace MITLibraryTextBookManagementSystem.Controllers
         public ActionResult Index()
         {
             UserModel userModel = new UserModel();
+           
             return View(userModel.GetUsers());
         }
         // GET: User
         [AllowAnonymous]
         public ActionResult Registration()
         {
-            return View();
+            UserModel userModel = new UserModel();
+            userModel.RoleName = userModel.getUserRole();
+            return View(userModel);
         }
         [AllowAnonymous]
         [HttpPost]

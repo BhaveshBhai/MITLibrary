@@ -165,24 +165,16 @@
                     <table id="tblInventor" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>
-                                    Institution Symbol
-                                </th>
+                               
                                 <th>
                                     Item Holding Location
                                 </th>
-                                <th>
-                                    Material Format
-
-                                </th>
+                                
                                 <th>
                                     OCLC_Number
 
                                 </th>
-                                <th>
-                                    Publication_Date
-
-                                </th>
+                                
                                 <th>
                                     Item_Barcode
 
@@ -356,7 +348,10 @@
                  contentType: false,
                  async: false,
                  success: function (response) {
-                     console.log(response.InventorData);
+                     var data2 = '@TempData["InventorFile"]';
+                     console.log("perfect");
+                     console.log(data2);
+                     
                      var objInventorJson = jQuery.parseJSON(response.InventorData);
 
                      //var DataList = {};
@@ -366,11 +361,9 @@
                      oTblReport.DataTable({
                          "data": objInventorJson,
                          "columns": [
-                             { "data": "Institution_Symbol" },
+                             
                              { "data": "Item_Holding_Location" },
-                             { "data": "Material_Format" },
                              { "data": "OCLC_Number" },
-                             { "data": "Publication_Date" },
                              { "data": "Item_Barcode" },
                              { "data": "Item_Status_Current_Status" }
                          ],
@@ -389,7 +382,9 @@
                      })
                  },
                  error: function (response) {
-
+                     var data3 = '@TempData["InventorFile"]';
+                     console.log("error");
+                     console.log(data3);
                      $(document).Toasts('create', {
                          class: 'bg-danger',
                          title: 'Invalid Header',
