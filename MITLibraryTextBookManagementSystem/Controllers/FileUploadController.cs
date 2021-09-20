@@ -23,6 +23,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             textBookViewModel.Year = textBookViewModel.GetYearsList();
             textBookViewModel.Campus = textBookViewModel.GetCampusList();
             textBookViewModel.Semester = textBookViewModel.GetSemesterList();
+            TempData["InventorFile"] = "";
             return View(textBookViewModel);
         }
         [HttpPost]
@@ -346,6 +347,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                             else
                             {
                                 InventorData = JsonConvert.SerializeObject(textBookViewModel.ImportInventors);
+                                TempData["InventorFile"] = InventorData;
                                 textBookViewModel.ImportInventor = InventorData;
                                 return Json(new { InventorData });
                             }

@@ -435,7 +435,7 @@
     <Content Include="Views\Shared\_NavBar.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\User\Login.cshtml" />
-    <Content Include="Views\FileUpload\_Units.cshtml" />
+    <Content Include="Views\FileUpload\InventorAjax.cshtml" />
     <Content Include="Views\FileUpload\FileUploadIndex.cshtml" />
     <Content Include="Views\Unit\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />

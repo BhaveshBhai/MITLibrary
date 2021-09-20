@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MITLibraryTextBookManagementSystem.Models
 {
@@ -17,6 +18,7 @@ namespace MITLibraryTextBookManagementSystem.Models
         public string FirstName { get; set; }
         [Required(ErrorMessage = "Last name is required.")]
         public string LastName { get; set; }
+        public IEnumerable<SelectListItem> RoleName { get; set; }
 
         public int? Role_Id { get; set; }
         [Required(ErrorMessage = "Please enter password")]
@@ -27,7 +29,7 @@ namespace MITLibraryTextBookManagementSystem.Models
 
         [Display(Name = "Confirm password")]
         [Required(ErrorMessage = "Please enter confirm password")]
-        [Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
@@ -37,7 +39,7 @@ namespace MITLibraryTextBookManagementSystem.Models
             {
                 using (var db =new  MITDBContext())
                 {
-                    userModel.Role_Id = 3;
+                    userModel.Role_Id = userModel.Role_Id;
                     db.Users.Add(userModel);
                     db.SaveChanges();
                 }
@@ -89,6 +91,27 @@ namespace MITLibraryTextBookManagementSystem.Models
                 return null;
             }
         }
-        
+        public IEnumerable<SelectListItem> getUserRole()
+        {
+            SelectList lstobj = null;
+            try
+            {
+                using (MITDBContext db = new MITDBContext())
+                {
+                    var list = db.Roles.Select(x => new SelectListItem
+                    {
+                        Value = x.Role_Id.ToString(),
+                        Text = x.Role_Name
+                    }).ToList();
+                    lstobj = new SelectList(list, "Value", "Text");
+                }
+                return lstobj;
+            }
+            catch (Exception ex)
+            {
+                return lstobj;
+            }
+        }
+
     }
 }
