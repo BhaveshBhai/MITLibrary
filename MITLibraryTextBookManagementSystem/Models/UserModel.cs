@@ -98,7 +98,7 @@ namespace MITLibraryTextBookManagementSystem.Models
             {
                 using (MITDBContext db = new MITDBContext())
                 {
-                    var list = db.Roles.Select(x => new SelectListItem
+                    var list = db.Roles.Where(x=>x.Role_Id!=1).Select(x => new SelectListItem
                     {
                         Value = x.Role_Id.ToString(),
                         Text = x.Role_Name
