@@ -80,5 +80,10 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                 return View(userModel);
             }
         }
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return View("Login");
+        }
     }
 }

@@ -26,54 +26,59 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
         <!-- Add icons to the links using the .nav-icon class
     with font-awesome or any other icon font library -->
-        @if (@HttpContext.Current.Session["role_id"].ToString() == "1")
+        @if (@HttpContext.Current.Session["role_id"] != null)
         {
-            <li class="nav-item has-treeview">
-                <a href="/Home/Index" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>
-                        User List
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/User/Index" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>User List</p>
-                        </a>
-                    </li>
+            // cast it and use it
+            // The code
 
-                </ul>
-            </li>
-        }
+            @if (@HttpContext.Current.Session["role_id"].ToString() == "1")
+            {
+                <li class="nav-item has-treeview">
+                    <a href="/Home/Index" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                            User List
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/User/Index" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>User List</p>
+                            </a>
+                        </li>
 
-        @if (@HttpContext.Current.Session["role_id"].ToString() == "1" || @HttpContext.Current.Session["role_id"].ToString() == "3")
-        {
-            <li class="nav-item has-treeview">
-                <a href="/Home/Index" class="nav-link">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
-                    <p>
-                        Analysis data
-                        <i class="right fas fa-angle-left"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="/FileUpload/Index" class="nav-link active">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>File Upload And Analysis</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Generate Report</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        }
+                    </ul>
+                </li>
+            }
+
+            @if (@HttpContext.Current.Session["role_id"].ToString() == "1" || @HttpContext.Current.Session["role_id"].ToString() == "3")
+            {
+                <li class="nav-item has-treeview">
+                    <a href="/Home/Index" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Analysis data
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/FileUpload/Index" class="nav-link active">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>File Upload And Analysis</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Generate Report</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            }
             @if (@HttpContext.Current.Session["role_id"].ToString() == "1" || @HttpContext.Current.Session["role_id"].ToString() == "2")
             {
 
@@ -95,9 +100,28 @@
 
                     </ul>
                 </li>
-            }
+                <li class="nav-item has-treeview">
+                    <a href="/Home/Index" class="nav-link">
+                        <i class="nav-icon fas fa-book"></i>
+                        <p>
+                            Log Out
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="/User/Logout" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Log Out</p>
+                            </a>
+                        </li>
 
-        </ul>
+                    </ul>
+                </li>
+            }
+        }
+
+    </ul>
             </nav>              
             <!-- /.sidebar-menu -->
         </div>

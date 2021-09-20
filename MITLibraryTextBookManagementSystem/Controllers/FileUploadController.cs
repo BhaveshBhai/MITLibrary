@@ -36,16 +36,20 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                 textBookViewModel.Campus = textBookViewModel.GetCampusList();
                 textBookViewModel.Semester = textBookViewModel.GetSemesterList();
                 string folderName = "UploadFile";
+                DateTime fileUploadTime = DateTime.Now;
+                string UserId = this.Session["role_Id"].ToString();
                 string targetFolder = Server.MapPath("~/" + folderName);
-                if (textBookViewModel.UnitFile != null && textBookViewModel.ImportUnit == null)
+                string UnitfileName;
+                string UnitfileExtension;
+                string InventorFileName;
+                string inventorfileExtension;
+                if (textBookViewModel.UnitFile != null)
                 {
-                    string UnitfileName = textBookViewModel.UnitFile.FileName;
-                    string UnitfileExtension = Path.GetExtension(UnitfileName);
-
-
+                    UnitfileName = textBookViewModel.UnitFile.FileName;
+                    UnitfileExtension = Path.GetExtension(UnitfileName);
                     string targetPath = Path.Combine(targetFolder, UnitfileName);
 
-                    if (UnitfileExtension == ".csv")
+                    if (UnitfileExtension == ".csv" && textBookViewModel.ImportUnit == null)
                     {
                         var stream = textBookViewModel.UnitFile.InputStream;
                         (textBookViewModel.ImportUnits, jsonresult) = textBookViewModel.UnitFileCheck(stream);
@@ -55,63 +59,30 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                             return View(textBookViewModel);
                         }
                     }
+                    else if (textBookViewModel.ImportUnit != null)
+                    {
+                        textBookViewModel.ImportUnits = JsonConvert.DeserializeObject<List<ImportUnit>>(textBookViewModel.ImportUnit);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please select Unit file");
+                        return View(textBookViewModel);
+                    }
 
                 }
-                else if (textBookViewModel.ImportUnit != null)
-                {
-                    textBookViewModel.ImportUnits = JsonConvert.DeserializeObject<List<ImportUnit>>(textBookViewModel.ImportUnit);
-                }
+                
                 else
                 {
                     ModelState.AddModelError("", "Please select Unit file");
                     return View(textBookViewModel);
                 }
-                if (textBookViewModel.TextBoxFile != null && textBookViewModel.ImportTextBooks==null)
+                
+                if (textBookViewModel.InventorFile != null )
                 {
-                    string TextBookfileName = textBookViewModel.TextBoxFile.FileName;
-                    string TextBookfileExtension = Path.GetExtension(TextBookfileName);
-
-                    string targetTextBookPath = Path.Combine(targetFolder, TextBookfileName);
-                    if (TextBookfileExtension == ".csv" && textBookViewModel.JsonImportTextBook == null)
-                    {
-                        var stream = textBookViewModel.TextBoxFile.InputStream;
-                        (textBookViewModel.ImportTextBooks, jsonresult) = textBookViewModel.TextBookFileCheck(stream);
-                        if (textBookViewModel.ImportTextBooks == null)
-                        {
-                            ModelState.AddModelError("", jsonresult);
-                            return View(textBookViewModel);
-
-                        }
-                        textBookViewModel.TextBoxFile.SaveAs(targetTextBookPath);
-                        textBookViewModel.FileUploadId = textBookViewModel.AddUploadedFile(folderName, TextBookfileName);
-                    }
-                    else if (textBookViewModel.ImportUnit != null)
-                    {
-                        textBookViewModel.ImportTextBooks = JsonConvert.DeserializeObject<List<ImportTextBook>>(textBookViewModel.JsonImportTextBook);
-                        textBookViewModel.TextBoxFile.SaveAs(targetTextBookPath);
-                        textBookViewModel.FileUploadId = textBookViewModel.AddUploadedFile(folderName, TextBookfileName);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Please select TextBook file");
-                        return View(textBookViewModel);
-                    }
-
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Please select TextBook file");
-                    return View(textBookViewModel);
-                }
-                if (textBookViewModel.InventorFile != null && textBookViewModel.ImportInventor == null)
-                {
-                    string InventorFileName = textBookViewModel.InventorFile.FileName;
-                    string inventorfileExtension = Path.GetExtension(InventorFileName);
-
-
-                    string targetPath = Path.Combine(targetFolder, InventorFileName);
-
-                    if (inventorfileExtension == ".csv")
+                    InventorFileName = textBookViewModel.InventorFile.FileName;
+                    inventorfileExtension = Path.GetExtension(InventorFileName);
+                    
+                    if (inventorfileExtension == ".csv" && textBookViewModel.ImportInventor == null)
                     {
                         var stream = textBookViewModel.InventorFile.InputStream;
                         (textBookViewModel.ImportInventors, jsonresult) = textBookViewModel.InventorFileCheck(stream);
@@ -121,17 +92,65 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                             return View(textBookViewModel);
                         }
                     }
+                    else if (textBookViewModel.ImportInventor != null)
+                    {
+                        textBookViewModel.ImportInventors = JsonConvert.DeserializeObject<List<ImportInventor>>(textBookViewModel.ImportInventor);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Please select Inventor file");
+                        return View(textBookViewModel);
+                    }
 
-                }
-                else if (textBookViewModel.ImportInventors != null)
-                {
-                    textBookViewModel.ImportInventors = JsonConvert.DeserializeObject<List<ImportInventor>>(textBookViewModel.ImportInventor);
                 }
                 else
                 {
                     ModelState.AddModelError("", "Please select Inventor file");
                     return View(textBookViewModel);
                 }
+                //TexBook
+                //if (textBookViewModel.TextBoxFile != null)
+                //{
+                //    string TextBookfileName = textBookViewModel.TextBoxFile.FileName;
+                //    string TextBookfileExtension = Path.GetExtension(TextBookfileName);
+
+                //    string targetTextBookPath = Path.Combine(targetFolder, TextBookfileName);
+                //    if (TextBookfileExtension == ".csv" && textBookViewModel.JsonImportTextBook == null)
+                //    {
+                //        var stream = textBookViewModel.TextBoxFile.InputStream;
+                //        (textBookViewModel.ImportTextBooks, jsonresult) = textBookViewModel.TextBookFileCheck(stream);
+                //        if (textBookViewModel.ImportTextBooks == null)
+                //        {
+                //            ModelState.AddModelError("", jsonresult);
+                //            return View(textBookViewModel);
+
+                //        }
+                //        //textBookViewModel.TextBoxFile.SaveAs(targetTextBookPath);
+                //        //textBookViewModel.FileUploadId = textBookViewModel.AddUploadedFile(folderName, TextBookfileName, UserId, fileUploadTime);
+                //    }
+
+                //    else if (textBookViewModel.ImportUnit != null)
+                //    {
+                //        textBookViewModel.ImportTextBooks = JsonConvert.DeserializeObject<List<ImportTextBook>>(textBookViewModel.JsonImportTextBook);
+                //        //textBookViewModel.TextBoxFile.SaveAs(targetTextBookPath);
+                //        //textBookViewModel.FileUploadId = textBookViewModel.AddUploadedFile(folderName, TextBookfileName, UserId, fileUploadTime);
+                //    }
+                //    else
+                //    {
+                //        ModelState.AddModelError("", "Please select TextBook file");
+                //        return View(textBookViewModel);
+                //    }
+
+                //}
+                //else
+                //{
+                //    ModelState.AddModelError("", "Please select TextBook file");
+                //    return View(textBookViewModel);
+                //}
+
+                string fileName = UnitfileName + ',' + InventorFileName;
+                textBookViewModel.FileUploadId = textBookViewModel.AddUploadedFile(folderName, fileName, UserId, fileUploadTime);
+
                 textBookViewModel.AddUnit(textBookViewModel.ImportUnits, textBookViewModel.campusId);
                 textBookViewModel.AddTextBook(textBookViewModel.ImportTextBooks, textBookViewModel.campusId, textBookViewModel.semesterId, textBookViewModel.yearId, textBookViewModel.FileUploadId);
                 textBookViewModel.AddInventor(textBookViewModel.ImportInventors, textBookViewModel.campusId, textBookViewModel.FileUploadId);
@@ -139,6 +158,8 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                 textBookViewModel.ImportUnit = null;
                 textBookViewModel.ImportTextBooks = null;
                 textBookViewModel.JsonImportTextBook = null;
+                textBookViewModel.ImportInventor = null;
+                textBookViewModel.ImportInventors = null;
                 return View(textBookViewModel);
             }
             catch (Exception ex)

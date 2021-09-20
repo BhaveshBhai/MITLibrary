@@ -348,10 +348,7 @@
                  contentType: false,
                  async: false,
                  success: function (response) {
-                     var data2 = '@TempData["InventorFile"]';
-                     console.log("perfect");
-                     console.log(data2);
-                     
+                    
                      var objInventorJson = jQuery.parseJSON(response.InventorData);
 
                      //var DataList = {};
@@ -369,7 +366,7 @@
                          ],
                          "responsive": true, "lengthChange": false, "autoWidth": false,
                          "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-                     }).buttons().container().appendTo('#tblTextBook_wrapper .col-md-6:eq(0)');
+                     }).buttons().container().appendTo('#tblInventor_wrapper .col-md-6:eq(0)');
 
                      $("#modal-Inventor").modal('show');
 
@@ -382,9 +379,7 @@
                      })
                  },
                  error: function (response) {
-                     var data3 = '@TempData["InventorFile"]';
-                     console.log("error");
-                     console.log(data3);
+                    
                      $(document).Toasts('create', {
                          class: 'bg-danger',
                          title: 'Invalid Header',

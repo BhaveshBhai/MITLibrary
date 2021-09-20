@@ -93,7 +93,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                 return lstobj;
             }
         }
-        public int AddUploadedFile(string location, string fileName)
+        public int AddUploadedFile(string location, string fileName,string userId, DateTime time)
         {
             try
             {
@@ -103,7 +103,9 @@ namespace MITLibraryTextBookManagementSystem.Models
                     {
                         File_Name = fileName,
                         Location = location,
-                        User_Id = 1
+                        User_Id = Convert.ToInt32(userId),
+                        DateTime = time
+                    
                     };
                     db.Entry(fileUpload).State = System.Data.Entity.EntityState.Added;
                     db.SaveChanges();
@@ -135,8 +137,8 @@ namespace MITLibraryTextBookManagementSystem.Models
                 streamReader.Dispose();
                 foreach (var item in UnitDetails)
                 {
-                    Regex regexForUnit = new Regex(@"^[A-Za-z]{2}[0-9]{3}\z");
-                    Regex regeNumber = new Regex(@"^[0-9]");
+                    Regex regexForUnit = new Regex(@"^[a-zA-Z]{2,5}[0-9]{3,4}$");
+                    Regex regeNumber = new Regex(@"(^[0-9]+$|^$|^\s$)");
 
                     if (!regexForUnit.Match(item.Unitcode).Success)
                     {
@@ -189,15 +191,16 @@ namespace MITLibraryTextBookManagementSystem.Models
                 streamReader.Dispose();
                 foreach (var item in UnitDetails)
                 {
-                    Regex regexForUnit = new Regex(@"^[A-Za-z]{2}[0-9]{3}\z");
-                    Regex regeNumber = new Regex(@"^[0-9]");
+                    Regex regexForUnit = new Regex(@"^[a-zA-Z]{2,5}[0-9]{3,4}$");
+                    Regex numberonly = new Regex(@"(^[0-9]+$|^$|^\s$)");
+                    Regex regeNumber = new Regex(@"[1-9][0-9]*\.?[0-9]*([Ee][+-]?[0-9]+)??");
 
                     if (!regexForUnit.Match(item.Unit_Code).Success)
                     {
                         jsonResult = "Unit Code should be first two charcter and 3 number allow only instead of " + item.Unit_Code;
                         return (null, jsonResult);
                     }
-                    else if (!regeNumber.Match(item.Year).Success)
+                    else if (!numberonly.Match(item.Year).Success)
                     {
                         jsonResult = "Year only allow number instead of" + item.Year;
                         return (null, jsonResult);
@@ -237,9 +240,9 @@ namespace MITLibraryTextBookManagementSystem.Models
                 streamReader.Dispose();
                 foreach (var item in UnitDetails)
                 {
-                    Regex regexForUnit = new Regex(@"^[A-Za-z]{2}[0-9]{3}\z");
-                    Regex regeNumber = new Regex(@"^[0-9]");
-if (!regeNumber.Match(item.OCLC_Number).Success)
+                    Regex regexForUnit = new Regex(@"^[a-zA-Z]{2,5}[0-9]{3,4}$");
+                    Regex regeNumber = new Regex(@"[1-9][0-9]*\.?[0-9]*([Ee][+-]?[0-9]+)??");
+                    if (!regeNumber.Match(item.OCLC_Number).Success)
                     {
                         jsonResult = "OCLC_Number only allow number instead of" + item.OCLC_Number;
                         return (null, jsonResult);
@@ -302,6 +305,7 @@ if (!regeNumber.Match(item.OCLC_Number).Success)
                         {
                             TextBook textBook = new TextBook();
                             textBook.Campus_Id = campusId;
+                            textBook.Title = item.Title;
                             textBook.Year_Id = yearId;
                             textBook.Semesters_Id = semsterId;
                             textBook.Author = item.Author;

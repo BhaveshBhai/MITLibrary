@@ -26,6 +26,8 @@ namespace MITLibraryTextBookManagementSystem.Models
 
         public int? User_Id { get; set; }
 
+        public DateTime? DateTime { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AumltInventor> AumltInventors { get; set; }
 
