@@ -22,7 +22,8 @@ namespace MITLibraryTextBookManagementSystem.Models
             {
                 using (var db = new MITDBContext())
                 {
-                    return db.TextBooks.Where(x => x.Identifier == IdentityNumber).FirstOrDefault();
+                    var unitId = db.TextBooks.Where(x => x.Identifier.ToString() == IdentityNumber).FirstOrDefault();
+                    return unitId;
                 }
             }
             catch (Exception ex)
@@ -36,10 +37,11 @@ namespace MITLibraryTextBookManagementSystem.Models
             {
                 using (var db = new MITDBContext())
                 {
-                    return db.Campuses.Where(X => X.Campus_Name == CampusName).Select(x => x.Campus_id).FirstOrDefault();
+                    var cId = db.Campuses.Where(X => X.Campus_Name.ToString() == CampusName).Select(x => x.Campus_id).FirstOrDefault();
+                    return cId;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return 0;
             }

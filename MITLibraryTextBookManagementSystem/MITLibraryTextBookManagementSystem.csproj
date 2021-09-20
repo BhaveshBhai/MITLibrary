@@ -163,6 +163,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\UnitController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -172,10 +173,12 @@
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\Coordinator.cs" />
     <Compile Include="Models\FileUpload.cs" />
+    <Compile Include="Models\FileUploadModel.cs" />
     <Compile Include="Models\ImportInventor.cs" />
     <Compile Include="Models\ImportTextBook.cs" />
     <Compile Include="Models\ImportUnit.cs" />
     <Compile Include="Models\MITDBContext.cs" />
+    <Compile Include="Models\Report.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Semester.cs" />
     <Compile Include="Models\TextBook.cs" />
@@ -439,6 +442,8 @@
     <Content Include="Views\FileUpload\FileUploadIndex.cshtml" />
     <Content Include="Views\Unit\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Report\Index.cshtml" />
+    <Content Include="Views\Report\GenerateResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
