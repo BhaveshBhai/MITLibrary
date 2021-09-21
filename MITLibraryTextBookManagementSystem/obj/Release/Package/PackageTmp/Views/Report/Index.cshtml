@@ -1,0 +1,19 @@
+﻿@model MITLibraryTextBookManagementSystem.Models.FileUploadModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("GenerateResult", "Report", FormMethod.Post))
+{
+    <div class="card-body">
+        <div class="form-group">
+            <label>Select Year</label>
+            @Html.DropDownListFor(m => m.FileId, Model.Files, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+}

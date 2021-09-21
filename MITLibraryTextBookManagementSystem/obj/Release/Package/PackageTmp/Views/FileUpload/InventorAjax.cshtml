@@ -1,0 +1,36 @@
+﻿@using MITLibraryTextBookManagementSystem.Models;
+@model MITLibraryTextBookManagementSystem.Models.TextBookViewModel
+
+@{
+    Layout = null;
+}
+
+
+                        @foreach (var item in Model.ImportInventors)
+                        {
+                        <tr>
+                            <th>
+                                @item.Institution_Symbol
+                            </th>
+                            <th>
+                                @item.Item_Holding_Location
+                            </th>
+                            <th>
+                                @item.Material_Format
+                            </th>
+                            <th>
+                                @item.OCLC_Number
+                            </th>
+                            <th>
+                                @item.Publication_Date
+                            </th>
+                            <th>
+                                @item.Item_Barcode
+                            </th>
+                            <th>
+                                @item.Item_Status_Current_Status
+                            </th>
+                        </tr>
+                        }
+                    
+<!-- /.modal-dialog -->

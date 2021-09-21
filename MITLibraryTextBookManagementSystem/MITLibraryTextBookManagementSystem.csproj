@@ -326,7 +326,6 @@
     <Content Include="Plugins\pdfmake\pdfmake.js.map" />
     <Content Include="Plugins\pdfmake\pdfmake.min.js.map" />
     <Content Include="Plugins\icheck-bootstrap\LICENSE" />
-    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -447,6 +446,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="UploadFile\" />
     <Folder Include="Views\FileUpload\Partial\" />
   </ItemGroup>

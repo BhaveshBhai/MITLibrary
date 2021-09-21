@@ -40,7 +40,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                         rp.AvaibleBook = books.Where(x => x.OCLC_Number == item.OCLC_Number).Count();
                         rp.ActualRequiredBook = (int)(item.Unit.Total_Enrollment != 0 ? Math.Ceiling((decimal)(item.Unit.Total_Enrollment / 10)) + 2 : 0);
                         reports.Add(rp);
-                        NeedOrder = (rp.AvaibleBook - rp.ActualRequiredBook) > 0 ? 0 : rp.AvaibleBook - rp.ActualRequiredBook
+                        NeedOrder = (rp.AvaibleBook - rp.ActualRequiredBook) > 0 ? 0 : rp.AvaibleBook - rp.ActualRequiredBook;
 
                     }
                     //                    var data = (from iv in db.AumltInventors.DistinctBy(x => x.Unit_Id)

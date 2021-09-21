@@ -1,0 +1,84 @@
+﻿
+@model MITLibraryTextBookManagementSystem.Models.UserModel
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+<!-- icheck bootstrap -->
+<link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<!-- Theme style -->
+@*<link rel="stylesheet" href="~/dist/css/adminlte.min.css">*@
+<link href="~/Content/AdminLTE/adminlte.min.css" rel="stylesheet" />
+<div class="hold-transition register-page">
+    @using (Html.BeginForm("Login", "User", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+        <div class="register-box">
+            <div class="register-logo">
+                <a href="#"><b>MIT</b>Library</a>
+            </div>
+
+            <div class="card">
+                <div class="card-body register-card-body">
+                    <p class="login-box-msg">Login</p>
+
+                    <div class="input-group mb-3">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "error" })
+                    </div>
+                    <div class="input-group mb-3">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                        @*@Html.ValidationMessageFor(m => m.Password, "", new { @class = "error" })*@
+                    </div>
+
+                    <div class="row">
+                        @*<div class="col-8">
+                                <div class="icheck-primary">
+                                    <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                                    <label for="agreeTerms">
+                                        I agree to the <a href="#">terms</a>
+                                    </label>
+                                </div>
+                            </div>*@
+                        <!-- /.col -->
+                        <div class="col-4">
+                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                    <p class="mb-1">
+                        <a href="/User/ForgotPassword">I forgot my password</a>
+                    </p>
+                    <p class="mb-0">
+                        <a href="/User/Registration" class="text-center">Register a new membership</a>
+                    </p>
+                </div>
+                <!-- /.form-box -->
+            </div><!-- /.card -->
+        </div>
+    }
+</div>
+<!-- jQuery -->
+<script src="~/plugins/jquery/jquery.min.js"></script>
+
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+@*<script src="~/dist/js/adminlte.min.js"></script>*@
+<script src="~/Scripts/AdminLTE/adminlte.min.js"></script>

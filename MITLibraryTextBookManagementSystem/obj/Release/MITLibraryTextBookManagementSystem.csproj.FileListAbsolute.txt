@@ -78,8 +78,8 @@ C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Web.WebPages.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Web.WebPages.Deployment.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\System.Web.WebPages.Razor.xml
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\bin\Antlr3.Runtime.pdb
-C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Release\MITLibraryTextBookManagementSystem.csprojAssemblyReference.cache
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Release\MITLibraryTextBookManagementSystem.csproj.CoreCompileInputs.cache
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Release\MITLibraryTextBookManagementSystem.csproj.CopyComplete
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Release\MITLibraryTextBookManagementSystem.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Release\MITLibraryTextBookManagementSystem.pdb
+C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Release\MITLibraryTextBookManagementSystem.csproj.AssemblyReference.cache
