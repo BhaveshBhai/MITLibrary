@@ -80,6 +80,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                 return View(userModel);
             }
         }
+        [AllowAnonymous]
         public ActionResult Logout()
         {
             Session.Clear();

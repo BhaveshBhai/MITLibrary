@@ -152,7 +152,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                 textBookViewModel.FileUploadId = textBookViewModel.AddUploadedFile(folderName, fileName, UserId, fileUploadTime);
 
                 textBookViewModel.AddUnit(textBookViewModel.ImportUnits, textBookViewModel.campusId);
-                textBookViewModel.AddTextBook(textBookViewModel.ImportTextBooks, textBookViewModel.campusId, textBookViewModel.semesterId, textBookViewModel.yearId, textBookViewModel.FileUploadId);
+                //textBookViewModel.AddTextBook(textBookViewModel.ImportTextBooks, textBookViewModel.campusId, textBookViewModel.semesterId, textBookViewModel.yearId, textBookViewModel.FileUploadId);
                 textBookViewModel.AddInventor(textBookViewModel.ImportInventors, textBookViewModel.campusId, textBookViewModel.FileUploadId);
                 textBookViewModel.ImportUnits = null;
                 textBookViewModel.ImportUnit = null;

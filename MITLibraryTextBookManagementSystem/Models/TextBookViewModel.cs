@@ -290,44 +290,44 @@ namespace MITLibraryTextBookManagementSystem.Models
                 throw;
             }
         }
-        public void AddTextBook(IList<ImportTextBook> importTextBooks, int campusId, int semsterId, int YearId, int FileId)
-        {
-            try
-            {
-                ImportUnit importUnit = new ImportUnit();
-                using (var db = new MITDBContext())
-                {
-                    foreach (var item in importTextBooks)
-                    {
-                        var UnitId = importUnit.ReturnUnitId(item.Unit_Code);
-                        //var textBook = db.TextBooks.Where(x => x.FileUpload_Id == FileId).FirstOrDefault();
-                        if (UnitId > 1)
-                        {
-                            TextBook textBook = new TextBook();
-                            textBook.Campus_Id = campusId;
-                            textBook.Title = item.Title;
-                            textBook.Year_Id = yearId;
-                            textBook.Semesters_Id = semsterId;
-                            textBook.Author = item.Author;
-                            textBook.Coordinator_Name = item.Coordinator;
-                            textBook.FileUpload_Id = FileUploadId;
-                            textBook.Identifier = item.Identifier;
-                            textBook.Publisher = item.Publisher;
-                            textBook.Requirement = item.Requirement;
-                            textBook.TextBook_Year = Convert.ToInt32(item.Year);
-                            textBook.Unit_Id = UnitId;
-                            db.TextBooks.Add(textBook);
-                            db.SaveChanges();
-                        }
+        //public void AddTextBook(IList<ImportTextBook> importTextBooks, int campusId, int semsterId, int YearId, int FileId)
+        //{
+        //    try
+        //    {
+        //        ImportUnit importUnit = new ImportUnit();
+        //        using (var db = new MITDBContext())
+        //        {
+        //            foreach (var item in importTextBooks)
+        //            {
+        //                var UnitId = importUnit.ReturnUnitId(item.Unit_Code);
+        //                //var textBook = db.TextBooks.Where(x => x.FileUpload_Id == FileId).FirstOrDefault();
+        //                if (UnitId > 1)
+        //                {
+        //                    TextBook textBook = new TextBook();
+        //                    textBook.Campus_Id = campusId;
+        //                    textBook.Title = item.Title;
+        //                    textBook.Year_Id = yearId;
+        //                    textBook.Semesters_Id = semsterId;
+        //                    textBook.Author = item.Author;
+        //                    textBook.Coordinator_Name = item.Coordinator;
+        //                    textBook.FileUpload_Id = FileUploadId;
+        //                    textBook.Identifier = item.Identifier;
+        //                    textBook.Publisher = item.Publisher;
+        //                    textBook.Requirement = item.Requirement;
+        //                    textBook.TextBook_Year = Convert.ToInt32(item.Year);
+        //                    textBook.Unit_Id = UnitId;
+        //                    db.TextBooks.Add(textBook);
+        //                    db.SaveChanges();
+        //                }
 
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
 
-            }
-        }
+        //    }
+        //}
         public void AddInventor(IList<ImportInventor> importInventors, int campusId,int FileId)
         {
             try
