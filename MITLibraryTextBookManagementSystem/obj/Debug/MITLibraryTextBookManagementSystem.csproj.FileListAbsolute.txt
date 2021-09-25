@@ -164,4 +164,4 @@ C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBoo
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.csproj.CopyComplete
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.dll
 C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.pdb
-C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.csproj.AssemblyReference.cache
+C:\MIT\MITLibrary\MITLibraryTextBookManagementSystem\obj\Debug\MITLibraryTextBookManagementSystem.csprojAssemblyReference.cache

@@ -22,6 +22,9 @@
     </div><!-- /.container-fluid -->
 </div>
 
+<div id="modalWrapper">
+    @* Inject form here *@
+</div>
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -39,18 +42,25 @@
                                     <th>Last Name</th>
                                     <th>User Name</th>
                                     <th>Role</th>
-                                    
+                                    <th>
+                                        Action
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach (User customer in Model)
+                                @foreach (User user in Model)
                                 {
                                     <tr>
-                                        <td>@customer.FirstName</td>
-                                        <td>@customer.LastName</td>
-                                        <td>@customer.UserName</td>
-                                        <td>@customer.Role.Role_Name</td>
-                                        
+                                        <td>@user.FirstName</td>
+                                        <td>@user.LastName</td>
+                                        <td>@user.UserName</td>
+                                        <td>@user.Role.Role_Name</td>
+                                        <td>
+                                            <a onclick="GetDetails(@user.User_Id)">
+
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
@@ -61,6 +71,10 @@
         </div>
     </div>
 </section>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
 <script>
     $(function () {
 
@@ -69,4 +83,38 @@
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).buttons().container().appendTo('#tbllstUsers_wrapper .col-md-6:eq(0)');
     });
+    $(function () {
+        $('#modal-User').modal();
+    });
+
+    function GetDetails(id) {
+        $.ajax({
+            url: "/User/UserDetail/" + id,
+            typr: "GET",
+            success: function (response) {
+                $('#modalWrapper').html(response);
+                $('#modal-User').modal('show');
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        return false;
+    }
+    //function editUser(userId) {
+    //    console.log(userId);
+    //    var url = "/User/GetUser"; // the url to the controller
+
+    //    $.get(url + '/' + userId, function (data) {
+    //        $('#modalWrapper').html(data);
+    //        $('#editModal').modal('show');
+    //    });
+    //    //$.ajax({
+    //    //    url: '/User/GetUser/' + userId, // The method name + paramater
+    //    //    type:'GET',
+    //    //    success: function (data) {
+    //    //        $('#modalWrapper').html(data); // This should be an empty div where you can inject your new html (the partial view)
+    //    //    }
+    //    //});
+    //}
 </script>

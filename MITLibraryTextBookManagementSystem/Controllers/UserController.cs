@@ -35,7 +35,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             }
             else
             {
-                userModel.FirstName = user.FirstName;
+                userModel.FirstName =user.FirstName;
                 userModel.LastName = user.LastName;
                 userModel.Password = user.Password;
                 userModel.ConfirmPassword = user.Password;
@@ -86,5 +86,24 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             Session.Clear();
             return View("Login");
         }
+        [AllowAnonymous]
+        [HttpGet]
+       
+        public ActionResult UserDetail(int id)
+        {
+            UserModel userModel = new UserModel();
+            userModel = userModel.GetUsers(id);
+            userModel.RoleName = userModel.getUserRole();
+            return PartialView("_User",userModel);
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public ActionResult UserEdit(User userModel)
+        {
+            UserModel model = new UserModel();
+            model.UpdateUser(userModel);
+            return RedirectToAction("Index");
+        }
     }
+
 }

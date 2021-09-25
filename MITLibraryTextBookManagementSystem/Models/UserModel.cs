@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -112,6 +113,44 @@ namespace MITLibraryTextBookManagementSystem.Models
                 return lstobj;
             }
         }
+        public UserModel GetUsers(int UserId)
+        {
+            try
+            {
+                using (var db = new MITDBContext())
+                {
+                    return db.Users.Where(x => x.User_Id == UserId).Select(y => new UserModel
+                    {
+                        FirstName = y.FirstName,
+                        LastName = y.LastName,
+                        User_Id = y.User_Id,
+                        Password = y.Password,
+                        Role_Id = y.Role_Id,
+                        UserName = y.UserName
+                    }).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+        public void UpdateUser(User user)
+        {
+            try
+            {
+                using (var db = new MITDBContext())
+                {
+                    db.Users.Attach(user);
+                    db.Entry(user).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
 
+                throw;
+            }
+        }
     }
 }
