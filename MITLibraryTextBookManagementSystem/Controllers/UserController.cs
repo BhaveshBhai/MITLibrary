@@ -60,17 +60,19 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             if (roleId > 0)
             {
                 this.Session["role_id"] = roleId;
+                Session["Email"] = user.UserName;
+                Session["UserName"] = user.FirstName+ user.LastName;
                 if (roleId == 1)
                 {
                     return RedirectToAction("Index", "Home");
                 }
                 else if (roleId == 2)
                 {
-                    return RedirectToAction("Index", "Unit");
+                    return RedirectToAction("Index", "StudentEnrollment");
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Unit");
+                    return RedirectToAction("Index", "StudentEnrollment");
                 }
             }
             else

@@ -14,8 +14,6 @@ namespace MITLibraryTextBookManagementSystem.Models
         [StringLength(50)]
         public string Coordinator_Name { get; set; }
 
-        public int? Unit_Id { get; set; }
-
-        public virtual Unit Unit { get; set; }
+        public int? UnitCode_Id { get; set; }
     }
 }

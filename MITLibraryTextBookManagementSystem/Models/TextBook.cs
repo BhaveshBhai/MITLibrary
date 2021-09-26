@@ -12,6 +12,7 @@ namespace MITLibraryTextBookManagementSystem.Models
         public TextBook()
         {
             AumltInventors = new HashSet<AumltInventor>();
+            Orders = new HashSet<Order>();
         }
 
         [Key]
@@ -34,29 +35,16 @@ namespace MITLibraryTextBookManagementSystem.Models
         [StringLength(250)]
         public string Requirement { get; set; }
 
-        public int? Semesters_Id { get; set; }
-
-        public int? Year_Id { get; set; }
-
-        public int? Campus_Id { get; set; }
-
-        public int? FileUpload_Id { get; set; }
-
         public string Coordinator_Name { get; set; }
 
-        public int? Unit_Id { get; set; }
+        public int? UnitCode_Id { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AumltInventor> AumltInventors { get; set; }
 
-        public virtual Campus Campus { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Order> Orders { get; set; }
 
-        public virtual FileUpload FileUpload { get; set; }
-
-        public virtual Semester Semester { get; set; }
-
-        public virtual Unit Unit { get; set; }
-
-        public virtual Year Year { get; set; }
+        public virtual UnitCode UnitCode { get; set; }
     }
 }

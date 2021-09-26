@@ -6,22 +6,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Text Book Details</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
-                    <li class="breadcrumb-item active">Text Book Details</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -29,10 +13,14 @@
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Text Book Details</h3>
+                        <a onclick="AddBook()">
+
+                            <i class="fa fa-book">Add Book</i>
+                        </a>
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="tbllstUnits" class="table table-bordered table-striped">
+                        <table id="tblPurchaseOrder" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>UnitCode</th>
@@ -48,20 +36,21 @@
                             <tbody>
                                 @foreach (TextBook customer in Model)
                                 {
-                                <tr>
-                                    <td>@customer.Unit.Unit_Code</td>
-                                    <td>@customer.Coordinator_Name</td>
-                                    <td>@customer.Author</td>
-                                    <td>@customer.TextBook_Year</td>
-                                    <td>@customer.Title</td>
-                                    <td>@customer.Publisher</td>
-                                    <td>@customer.Identifier</td>
-                                    <td>@customer.Requirement</td>
+                                    <tr>
+                                        <td>@customer.UnitCode.UnitCodeName</td>
+                                        <td>@customer.Coordinator_Name</td>
+                                        <td>@customer.Author</td>
+                                        <td>@customer.TextBook_Year</td>
+                                        <td>@customer.Title</td>
+                                        <td>@customer.Publisher</td>
+                                        <td>@customer.Identifier</td>
+                                        <td>@customer.Requirement</td>
 
-                                </tr>
+                                    </tr>
                                 }
                             </tbody>
                         </table>
+
                     </div>
                 </div>
             </div>
@@ -71,9 +60,9 @@
 <script>
     $(function () {
 
-        $("#tbllstUnits").DataTable({
+        $("#tblPurchaseOrder").DataTable({
             "responsive": true, "lengthChange": false, "autoWidth": false,
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#tbllstUnits_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#tblPurchaseOrder_wrapper .col-md-6:eq(0)');
     });
-</script>
+    </script>

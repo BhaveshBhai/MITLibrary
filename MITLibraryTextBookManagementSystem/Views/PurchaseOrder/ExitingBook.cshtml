@@ -1,0 +1,96 @@
+﻿@model IEnumerable<MITLibraryTextBookManagementSystem.Models.Report>
+
+@{
+    ViewBag.Title = "GenerateResult";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="PurchaseOrderLoad">
+    @* Inject form here *@
+</div>
+<table id="tblLstReport" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>UnitCode</th>
+            <th>CampusName</th>
+            <th>
+                Title
+            </th>
+            <th>BookPublisher</th>
+            <th>OCLC Number</th>
+            <th>AvaibleBook</th>
+            <th>ActualRequiredBook</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @item.UnitCode
+            </td>
+            <td>
+                @item.CampusName
+            </td>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.BookPublisher
+            </td>
+            <td>
+                @item.OCLC_Number
+            </td>
+            <td>
+                @item.AvaibleBook
+            </td>
+            <td>
+                @item.ActualRequiredBook
+            </td>
+            <td>
+                <a onclick="GetNewPurchseOrders(@item.Id, @item.ActualRequiredBook)">
+
+                    <i class="fa fa-upload"></i>
+                </a>
+            </td>
+        </tr>
+            }
+        }
+    </tbody>
+</table>
+
+
+<script>
+    $(function () {
+        bsCustomFileInput.init();
+        $("#tblLstReport").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#tblLstReport_wrapper .col-md-6:eq(0)');
+    });
+    $(function () {
+        $('#modal-purchaseOrders').modal();
+    });
+
+    function GetNewPurchseOrders(id, rq) {
+        $.ajax({
+            url: "/PurchaseOrder/PurchaseRequest",
+            typr: "GET",
+            data: {
+                id: id,
+                rq:rq
+            },
+            success: function (response) {
+                $('#PurchaseOrderLoad').html(response);
+                $('#modal-purchaseOrders').modal('show');
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+        return false;
+    }
+</script>

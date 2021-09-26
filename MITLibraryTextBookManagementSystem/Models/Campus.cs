@@ -13,8 +13,7 @@ namespace MITLibraryTextBookManagementSystem.Models
         public Campus()
         {
             AumltInventors = new HashSet<AumltInventor>();
-            TextBooks = new HashSet<TextBook>();
-            Units = new HashSet<Unit>();
+            StudentEnrollments = new HashSet<StudentEnrollment>();
         }
 
         [Key]
@@ -27,9 +26,6 @@ namespace MITLibraryTextBookManagementSystem.Models
         public virtual ICollection<AumltInventor> AumltInventors { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TextBook> TextBooks { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Unit> Units { get; set; }
+        public virtual ICollection<StudentEnrollment> StudentEnrollments { get; set; }
     }
 }

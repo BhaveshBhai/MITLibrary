@@ -1,0 +1,222 @@
+﻿@using MITLibraryTextBookManagementSystem.Models;
+@model IEnumerable<MITLibraryTextBookManagementSystem.Models.TextBook>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">Text Book Details</h1>
+
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                    @*<li class="breadcrumb-item active">Text Book Details</li>*@
+                </ol>
+                <ol class="breadcrumb float-sm-left">
+                    @*<li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>*@
+                    <li class="breadcrumb-item active">Text Book Details</li>
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+@using (Html.BeginForm("ImportTextBook", "StudentEnrollment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="form-group">
+    <label for="exampleInputFile">Import File For TextBook</label>
+
+    <div class="input-group">
+        <div class="custom-file">
+            @Html.TextBox("TextBoxFile", "", new { @type = "file", @class = "custom-file-input" }) <br />
+            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+        </div>
+        <div class="input-group-append">
+            <span class="input-group-text previewTextBox" id="Preview_TextBox">Preview</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Import" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+    <div id="bookWrapper">
+        @* Inject form here *@
+    </div>
+    <div class="modal fade" id="modal-TextBook">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width:fit-content !important;right:25%">
+                <div class="modal-header">
+                    <h4 class="modal-title">TextBok</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <table id="tblTextBook" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>UnitCode</th>
+                                <th>Coordinator</th>
+                                <th>Author</th>
+                                <th>Year</th>
+                                <th>Title</th>
+                                <th>Publisher</th>
+                                <th>Identifier</th>
+                                <th>Requirement</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Use this file</button>
+                    <button type="button" class="btn btn-primary" onclick="textBookmodelClose()" data-dismiss="modal">Upload Differnt file?</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Text Book Details</h3>
+                            <a onclick="AddBook()">
+
+                                <i class="fa fa-book">Add Book</i>
+                            </a>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="tbllstUnits" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>UnitCode</th>
+                                        <th>Coordinator</th>
+                                        <th>Author</th>
+                                        <th>Year</th>
+                                        <th>Title</th>
+                                        <th>Publisher</th>
+                                        <th>Identifier</th>
+                                        <th>Requirement</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (TextBook customer in Model)
+                                    {
+                                        <tr>
+                                            <td>@customer.UnitCode.UnitCodeName</td>
+                                            <td>@customer.Coordinator_Name</td>
+                                            <td>@customer.Author</td>
+                                            <td>@customer.TextBook_Year</td>
+                                            <td>@customer.Title</td>
+                                            <td>@customer.Publisher</td>
+                                            <td>@customer.Identifier</td>
+                                            <td>@customer.Requirement</td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(function () {
+
+            $("#tbllstUnits").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#tbllstUnits_wrapper .col-md-6:eq(0)');
+        });
+        $(function () {
+            $('#modal-textbookAdd').modal();
+        });
+
+        function AddBook() {
+            $.ajax({
+                url: "/StudentEnrollment/AddBook",
+                typr: "GET",
+                success: function (response) {
+                    $('#bookWrapper').html(response);
+                    $('#modal-textbookAdd').modal('show');
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+            return false;
+        }
+        $(".previewTextBox").click(function () {
+            var formData = new FormData();
+            formData.append('file', $('#TextBoxFile')[0].files[0]);
+            $.ajax({
+                url: '/FileUpload/getTextBookData',
+                type: 'POST',
+                data: formData,
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,  // tell jQuery not to set contentType
+                success: function (data) {
+                    console.log(data.TextBookData);
+                    var objTextBookJson = jQuery.parseJSON(data.TextBookData);
+
+                    //var DataList = {};
+                    /*document.getElementById("JsonImportTextBook").value = data.TextBookData;*/
+                    var oTblReport = $("#tblTextBook");
+
+                    oTblReport.DataTable({
+                        "data": objTextBookJson,
+                        "columns": [
+                            { "data": "Unit_Code" },
+                            { "data": "Coordinator" },
+                            { "data": "Author" },
+                            { "data": "Year" },
+                            { "data": "Title" },
+                            { "data": "Publisher" },
+                            { "data": "Identifier" },
+                            { "data": "Requirement" }
+                        ],
+                        "responsive": true, "lengthChange": false, "autoWidth": false,
+                        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                    }).buttons().container().appendTo('#tblTextBook_wrapper .col-md-6:eq(0)');
+
+                    $("#modal-TextBook").modal('show');
+
+                },
+                failure: function (response) {
+                    $(document).Toasts('create', {
+                        class: 'bg-danger',
+                        title: 'Invalid Header',
+                        body: response.responseJSON
+                    })
+                },
+                error: function (response) {
+
+                    $(document).Toasts('create', {
+                        class: 'bg-danger',
+                        title: 'Invalid Header',
+                        body: response.responseJSON
+                    })
+                }
+            });
+        });
+        function textBookModelClose() {
+            $("#modal-TextBook").modal('hide');
+            $("#TextBoxFile").click();
+        };
+    </script>

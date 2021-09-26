@@ -6,28 +6,27 @@ namespace MITLibraryTextBookManagementSystem.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class AumltInventor
+    public partial class StudentEnrollment
     {
-        [Key]
-        public int AUMLTInventor_Id { get; set; }
+        public int StudentEnrollmentId { get; set; }
 
-        public string OCLC_Number { get; set; }
+        public int? UnitCode_Id { get; set; }
 
-        public string Item_Barcode { get; set; }
-
-        public int? TextBookId { get; set; }
+        public int? Capacity { get; set; }
 
         public int? Campus_Id { get; set; }
 
-        public int? Inventor_FileUpload_Id { get; set; }
+        public int? Total_Enrollment { get; set; }
 
-        public int? UnitCode_Id { get; set; }
+        public bool? RunningOrNot { get; set; }
+
+        public int? Lab_and_tut_capacity { get; set; }
+
+        public int? StudentDetail_FileId { get; set; }
 
         public virtual Campus Campus { get; set; }
 
         public virtual FileUpload FileUpload { get; set; }
-
-        public virtual TextBook TextBook { get; set; }
 
         public virtual UnitCode UnitCode { get; set; }
     }
