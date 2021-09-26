@@ -18,11 +18,11 @@ namespace MITLibraryTextBookManagementSystem.Models
 
         public int? TextBookId { get; set; }
 
-        public int? Unit_Id { get; set; }
-
         public int? Campus_Id { get; set; }
 
         public int? Inventor_FileUpload_Id { get; set; }
+
+        public int? UnitCode_Id { get; set; }
 
         public virtual Campus Campus { get; set; }
 
@@ -30,6 +30,6 @@ namespace MITLibraryTextBookManagementSystem.Models
 
         public virtual TextBook TextBook { get; set; }
 
-        public virtual Unit Unit { get; set; }
+        public virtual UnitCode UnitCode { get; set; }
     }
 }

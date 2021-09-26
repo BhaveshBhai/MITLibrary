@@ -72,7 +72,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                 return lstobj;
             }
         }
-        public IEnumerable<SelectListItem> GetCampusList()
+        public static IEnumerable<SelectListItem> GetCampusList()
         {
             SelectList lstobj = null;
             try
@@ -258,7 +258,7 @@ namespace MITLibraryTextBookManagementSystem.Models
             }
 
         }
-        public void AddUnit(IList<ImportUnit> importUnits, int campusId)
+        public void AddStudentDetails(IList<ImportUnit> importUnits, int campusId)
         {
             try
             {
@@ -266,18 +266,24 @@ namespace MITLibraryTextBookManagementSystem.Models
                 {
                     foreach (var item in importUnits)
                     {
-                        var unit = db.Units.Where(x => x.Unit_Code == item.Unitcode).FirstOrDefault();
-                        if (unit == null)
+
+                        //var unit = (from st in db.StudentEnrollmentDetails
+                        //            join uc in db.UnitCodes on st.UnitCode_Id equals uc.UnitCodeId
+                        //            where uc.UnitCodeName == item.Unitcode
+                        //            select st).FirstOrDefault();
+                        var unitCode_Id = db.UnitCodes.Where(x => x.UnitCodeName == item.Unitcode).Select(x => x.UnitCodeId).FirstOrDefault();
+                        var unit = db.StudentEnrollments.Where(x => x.UnitCode_Id == unitCode_Id).FirstOrDefault();
+                       
+                        if (unit == null && unitCode_Id>0)
                         {
-                            unit = new Unit();
+                            unit = new StudentEnrollment();
                             unit.Campus_Id = campusId;
                             unit.Capacity = string.IsNullOrEmpty(item.Capacity) ? 0 : Convert.ToInt32(item.Capacity);
                             unit.Lab_and_tut_capacity = string.IsNullOrEmpty(item.Lab_and_tut_capacity) ? 0 : Convert.ToInt32(item.Lab_and_tut_capacity);
                             unit.RunningOrNot = Convert.ToBoolean(item.Not_Running);
                             unit.Total_Enrollment = string.IsNullOrEmpty(item.Total_Enrolled) ? 0 : Convert.ToInt32(item.Total_Enrolled);
-                            unit.Unit_Code = item.Unitcode;
-                            unit.Unit_Title = item.Unit_title;
-                            db.Units.Add(unit);
+                            unit.UnitCode_Id = unitCode_Id;
+                            db.StudentEnrollments.Add(unit);
                             db.SaveChanges();
                         }
 
@@ -287,47 +293,43 @@ namespace MITLibraryTextBookManagementSystem.Models
             catch (Exception ex)
             {
 
-                throw;
             }
         }
-        //public void AddTextBook(IList<ImportTextBook> importTextBooks, int campusId, int semsterId, int YearId, int FileId)
-        //{
-        //    try
-        //    {
-        //        ImportUnit importUnit = new ImportUnit();
-        //        using (var db = new MITDBContext())
-        //        {
-        //            foreach (var item in importTextBooks)
-        //            {
-        //                var UnitId = importUnit.ReturnUnitId(item.Unit_Code);
-        //                //var textBook = db.TextBooks.Where(x => x.FileUpload_Id == FileId).FirstOrDefault();
-        //                if (UnitId > 1)
-        //                {
-        //                    TextBook textBook = new TextBook();
-        //                    textBook.Campus_Id = campusId;
-        //                    textBook.Title = item.Title;
-        //                    textBook.Year_Id = yearId;
-        //                    textBook.Semesters_Id = semsterId;
-        //                    textBook.Author = item.Author;
-        //                    textBook.Coordinator_Name = item.Coordinator;
-        //                    textBook.FileUpload_Id = FileUploadId;
-        //                    textBook.Identifier = item.Identifier;
-        //                    textBook.Publisher = item.Publisher;
-        //                    textBook.Requirement = item.Requirement;
-        //                    textBook.TextBook_Year = Convert.ToInt32(item.Year);
-        //                    textBook.Unit_Id = UnitId;
-        //                    db.TextBooks.Add(textBook);
-        //                    db.SaveChanges();
-        //                }
+        public void AddTextBook(IList<ImportTextBook> importTextBooks, int campusId, int semsterId)
+        {
+            try
+            {
+                ImportUnit importUnit = new ImportUnit();
+                using (var db = new MITDBContext())
+                {
+                    foreach (var item in importTextBooks)
+                    {
+                        var UnitId = importUnit.ReturnUnitId(item.Unit_Code);
+                        //var textBook = db.TextBooks.Where(x => x.FileUpload_Id == FileId).FirstOrDefault();
+                        if (UnitId > 0)
+                        {
+                            TextBook textBook = new TextBook();
+                            textBook.Title = item.Title;
+                            //textBook.Year_Id = yearId;
+                            textBook.Author = item.Author;
+                            textBook.Coordinator_Name = item.Coordinator;
+                            textBook.Identifier = item.Identifier;
+                            textBook.Publisher = item.Publisher;
+                            textBook.Requirement = item.Requirement;
+                            textBook.TextBook_Year = Convert.ToInt32(item.Year);
+                            textBook.UnitCode_Id = UnitId;
+                            db.TextBooks.Add(textBook);
+                            db.SaveChanges();
+                        }
 
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
 
-        //    }
-        //}
+            }
+        }
         public void AddInventor(IList<ImportInventor> importInventors, int campusId,int FileId)
         {
             try
@@ -345,7 +347,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                             inventors.Campus_Id = campusId;
                             inventors.OCLC_Number = Convert.ToDecimal(item.OCLC_Number);
                             inventors.TextBookId = inventor.TextBook_Id;
-                            inventors.Unit_Id = inventor.Unit_Id;
+                            inventors.UnitCode_Id = inventor.UnitCode_Id;
                             inventors.Item_Barcode = item.Item_Barcode;
                             inventors.Inventor_FileUpload_Id = FileId;
                             db.AumltInventors.Add(inventors);
@@ -360,5 +362,20 @@ namespace MITLibraryTextBookManagementSystem.Models
 
             }
         }
+        public List<TextBook> GetTextBooks()
+        {
+            try
+            {
+                using (var db = new MITDBContext())
+                {
+                    return db.TextBooks.Include("UnitCode").ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
     }
 }

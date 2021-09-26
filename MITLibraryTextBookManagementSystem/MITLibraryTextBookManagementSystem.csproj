@@ -164,12 +164,13 @@
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
-    <Compile Include="Controllers\UnitController.cs" />
+    <Compile Include="Controllers\StudentEnrollmentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AumltInventor.cs" />
+    <Compile Include="Models\BookModel.cs" />
     <Compile Include="Models\Campus.cs" />
     <Compile Include="Models\Coordinator.cs" />
     <Compile Include="Models\FileUpload.cs" />
@@ -181,9 +182,10 @@
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Semester.cs" />
+    <Compile Include="Models\StudentEnrollment.cs" />
     <Compile Include="Models\TextBook.cs" />
     <Compile Include="Models\TextBookViewModel.cs" />
-    <Compile Include="Models\Unit.cs" />
+    <Compile Include="Models\UnitCode.cs" />
     <Compile Include="Models\UnitValidator.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -439,11 +441,12 @@
     <Content Include="Views\User\Login.cshtml" />
     <Content Include="Views\FileUpload\InventorAjax.cshtml" />
     <Content Include="Views\FileUpload\FileUploadIndex.cshtml" />
-    <Content Include="Views\Unit\Index.cshtml" />
+    <Content Include="Views\StudentEnrollment\Index.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Report\Index.cshtml" />
     <Content Include="Views\Report\GenerateResult.cshtml" />
     <Content Include="Views\User\_User.cshtml" />
+    <Content Include="Views\StudentEnrollment\_AddBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -21,7 +21,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
         {
             TextBookViewModel textBookViewModel = new TextBookViewModel();
             textBookViewModel.Year = textBookViewModel.GetYearsList();
-            textBookViewModel.Campus = textBookViewModel.GetCampusList();
+            textBookViewModel.Campus = TextBookViewModel.GetCampusList();
             textBookViewModel.Semester = textBookViewModel.GetSemesterList();
             TempData["InventorFile"] = "";
             return View(textBookViewModel);
@@ -33,11 +33,11 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             {
                 string jsonresult;
                 textBookViewModel.Year = textBookViewModel.GetYearsList();
-                textBookViewModel.Campus = textBookViewModel.GetCampusList();
+                textBookViewModel.Campus = TextBookViewModel.GetCampusList();
                 textBookViewModel.Semester = textBookViewModel.GetSemesterList();
                 string folderName = "UploadFile";
                 DateTime fileUploadTime = DateTime.Now;
-                string UserId = this.Session["role_Id"].ToString();
+                string UserId = Session["role_Id"].ToString();
                 string targetFolder = Server.MapPath("~/" + folderName);
                 string UnitfileName;
                 string UnitfileExtension;
@@ -151,7 +151,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
                 string fileName = UnitfileName + ',' + InventorFileName;
                 textBookViewModel.FileUploadId = textBookViewModel.AddUploadedFile(folderName, fileName, UserId, fileUploadTime);
 
-                textBookViewModel.AddUnit(textBookViewModel.ImportUnits, textBookViewModel.campusId);
+                textBookViewModel.AddStudentDetails(textBookViewModel.ImportUnits, textBookViewModel.campusId);
                 //textBookViewModel.AddTextBook(textBookViewModel.ImportTextBooks, textBookViewModel.campusId, textBookViewModel.semesterId, textBookViewModel.yearId, textBookViewModel.FileUploadId);
                 textBookViewModel.AddInventor(textBookViewModel.ImportInventors, textBookViewModel.campusId, textBookViewModel.FileUploadId);
                 textBookViewModel.ImportUnits = null;
@@ -240,7 +240,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
         {
             TextBookViewModel textBookViewModel = new TextBookViewModel();
             textBookViewModel.Year = textBookViewModel.GetYearsList();
-            textBookViewModel.Campus = textBookViewModel.GetCampusList();
+            textBookViewModel.Campus = TextBookViewModel.GetCampusList();
             textBookViewModel.Semester = textBookViewModel.GetSemesterList();
             return View(textBookViewModel);
         }

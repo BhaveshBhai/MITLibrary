@@ -25,20 +25,22 @@ namespace MITLibraryTextBookManagementSystem.Models
                 using (var db = new MITDBContext())
                 {
                     var books = (from iv in db.AumltInventors
-                                 join u in db.Units on iv.Unit_Id equals u.Unit_Id
+                                 join uc in db.UnitCodes on iv.UnitCode_Id equals uc.UnitCodeId
+                                 join u in db.StudentEnrollments on uc.UnitCodeId equals u.UnitCode_Id
                                  where iv.Inventor_FileUpload_Id == fileId && iv.Campus_Id == u.Campus_Id
                                  select iv).ToList();
                     List<Report> reports = new List<Report>();
                     foreach (var item in books.DistinctBy(x=>x.OCLC_Number))
                     {
+                        var Studentresult = db.StudentEnrollments.Where(x => x.UnitCode_Id == item.UnitCode_Id).FirstOrDefault();
                         Report rp = new Report();
                         rp.Title = item.TextBook.Title;
                         rp.OCLC_Number = item.OCLC_Number.ToString();
-                        rp.UnitCode = item.Unit.Unit_Code;
+                        rp.UnitCode = item.UnitCode.UnitCodeName;
                         rp.BookPublisher = item.TextBook.Publisher.ToString();
                         rp.CampusName = item.Campus.Campus_Name;
                         rp.AvaibleBook = books.Where(x => x.OCLC_Number == item.OCLC_Number).Count();
-                        rp.ActualRequiredBook = (int)(item.Unit.Total_Enrollment != 0 ? Math.Ceiling((decimal)(item.Unit.Total_Enrollment / 10)) + 2 : 0);
+                        rp.ActualRequiredBook = (int)(Studentresult.Total_Enrollment != 0 ? Math.Ceiling((decimal)(Studentresult.Total_Enrollment / 10)) + 2 : 0);
                         reports.Add(rp);
                         NeedOrder = (rp.AvaibleBook - rp.ActualRequiredBook) > 0 ? 0 : rp.AvaibleBook - rp.ActualRequiredBook;
 

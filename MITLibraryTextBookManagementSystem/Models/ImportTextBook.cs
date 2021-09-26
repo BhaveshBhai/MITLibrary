@@ -16,6 +16,7 @@ namespace MITLibraryTextBookManagementSystem.Models
         public string Publisher { get; set; }
         public string Identifier { get; set; }
         public string Requirement { get; set; }
+        
 
     }
     public sealed class ImportTextBookMap : ClassMap<ImportTextBook>

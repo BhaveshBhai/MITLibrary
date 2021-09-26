@@ -12,7 +12,6 @@ namespace MITLibraryTextBookManagementSystem.Models
         public FileUpload()
         {
             AumltInventors = new HashSet<AumltInventor>();
-            TextBooks = new HashSet<TextBook>();
         }
 
         [Key]
@@ -32,8 +31,5 @@ namespace MITLibraryTextBookManagementSystem.Models
         public virtual ICollection<AumltInventor> AumltInventors { get; set; }
 
         public virtual User User { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TextBook> TextBooks { get; set; }
     }
 }

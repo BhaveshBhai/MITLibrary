@@ -18,8 +18,9 @@ namespace MITLibraryTextBookManagementSystem.Models
         public virtual DbSet<FileUpload> FileUploads { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Semester> Semesters { get; set; }
+        public virtual DbSet<StudentEnrollment> StudentEnrollments { get; set; }
         public virtual DbSet<TextBook> TextBooks { get; set; }
-        public virtual DbSet<Unit> Units { get; set; }
+        public virtual DbSet<UnitCode> UnitCodes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Year> Years { get; set; }
 
@@ -34,20 +35,25 @@ namespace MITLibraryTextBookManagementSystem.Models
                 .WithOptional(e => e.FileUpload)
                 .HasForeignKey(e => e.Inventor_FileUpload_Id);
 
-            modelBuilder.Entity<FileUpload>()
-                .HasMany(e => e.TextBooks)
-                .WithOptional(e => e.FileUpload)
-                .HasForeignKey(e => e.FileUpload_Id);
-
-            modelBuilder.Entity<Semester>()
-                .HasMany(e => e.TextBooks)
-                .WithOptional(e => e.Semester)
-                .HasForeignKey(e => e.Semesters_Id);
-
             modelBuilder.Entity<TextBook>()
                 .HasMany(e => e.AumltInventors)
                 .WithOptional(e => e.TextBook)
                 .HasForeignKey(e => e.TextBookId);
+
+            modelBuilder.Entity<UnitCode>()
+                .HasMany(e => e.AumltInventors)
+                .WithOptional(e => e.UnitCode)
+                .HasForeignKey(e => e.UnitCode_Id);
+
+            modelBuilder.Entity<UnitCode>()
+                .HasMany(e => e.StudentEnrollments)
+                .WithOptional(e => e.UnitCode)
+                .HasForeignKey(e => e.UnitCode_Id);
+
+            modelBuilder.Entity<UnitCode>()
+                .HasMany(e => e.TextBooks)
+                .WithOptional(e => e.UnitCode)
+                .HasForeignKey(e => e.UnitCode_Id);
         }
     }
 }

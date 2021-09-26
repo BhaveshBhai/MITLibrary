@@ -23,27 +23,14 @@ namespace MITLibraryTextBookManagementSystem.Models
         public string Lab_and_tut_capacity { get; set; }
         public string Not_Running {get;set;}
 
-        public List<TextBook> GetUnits()
+               public int ReturnUnitId(string Unit_Code)
         {
             try
             {
                 using (var db = new MITDBContext())
                 {
-                    return db.TextBooks.Include("Unit").ToList();
-                }
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
-        public int ReturnUnitId(string Unit_Code)
-        {
-            try
-            {
-                using (var db = new MITDBContext())
-                {
-                    return db.Units.Where(x=>x.Unit_Code==Unit_Code).Select(x=>x.Unit_Id).FirstOrDefault();
+                    return db.UnitCodes.Where(x => x.UnitCodeName == Unit_Code).Select(x => x.UnitCodeId).FirstOrDefault();
+                    
                 }
             }
             catch (Exception ex)
