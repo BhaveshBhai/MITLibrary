@@ -6,7 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@using (Html.BeginForm("Index", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("FileUploadIndex", "FileUpload", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(x => x.ImportUnits, new { id = "ImportUnits" });
@@ -365,7 +365,7 @@
                              { "data": "Item_Status_Current_Status" }
                          ],
                          "responsive": true, "lengthChange": false, "autoWidth": false,
-                         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                         "buttons": ["copy"]
                      }).buttons().container().appendTo('#tblInventor_wrapper .col-md-6:eq(0)');
 
                      $("#modal-Inventor").modal('show');

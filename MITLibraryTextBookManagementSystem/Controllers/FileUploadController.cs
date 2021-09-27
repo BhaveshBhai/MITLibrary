@@ -27,7 +27,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             return View(textBookViewModel);
         }
         [HttpPost]
-        public ActionResult Index(TextBookViewModel textBookViewModel)
+        public ActionResult FileUploadIndex(TextBookViewModel textBookViewModel)
         {
             try
             {
