@@ -451,7 +451,7 @@
     <Content Include="Views\User\_User.cshtml" />
     <Content Include="Views\StudentEnrollment\_AddBook.cshtml" />
     <Content Include="Views\PurchaseOrder\Index.cshtml" />
-    <Content Include="Views\PurchaseOrder\ExitingBook.cshtml" />
+    <Content Include="Views\PurchaseOrder\NewBookList.cshtml" />
     <Content Include="Views\PurchaseOrder\_PurchaseOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>

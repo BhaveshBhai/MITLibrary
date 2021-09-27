@@ -6,46 +6,49 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Text Book Details</h1>
-
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
-                    @*<li class="breadcrumb-item active">Text Book Details</li>*@
-                </ol>
-                <ol class="breadcrumb float-sm-left">
-                    @*<li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>*@
-                    <li class="breadcrumb-item active">Text Book Details</li>
-                </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.container-fluid -->
-</div>
-@using (Html.BeginForm("ImportTextBook", "StudentEnrollment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@if (@HttpContext.Current.Session["role_id"].ToString() == "1" || @HttpContext.Current.Session["role_id"].ToString() == "3")
 {
-<div class="form-group">
-    <label for="exampleInputFile">Import File For TextBook</label>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Text Book Details</h1>
 
-    <div class="input-group">
-        <div class="custom-file">
-            @Html.TextBox("TextBoxFile", "", new { @type = "file", @class = "custom-file-input" }) <br />
-            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-        </div>
-        <div class="input-group-append">
-            <span class="input-group-text previewTextBox" id="Preview_TextBox">Preview</span>
-        </div>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>
+                        @*<li class="breadcrumb-item active">Text Book Details</li>*@
+                    </ol>
+                    <ol class="breadcrumb float-sm-left">
+                        @*<li class="breadcrumb-item"><a href="/Home/Index">Home</a></li>*@
+                        @*<li class="breadcrumb-item active">Text Book Details</li>*@
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Import" class="btn btn-default" />
+    using (Html.BeginForm("ImportTextBook", "StudentEnrollment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            <label for="exampleInputFile">Import File For TextBook</label>
+
+            <div class="input-group">
+                <div class="custom-file">
+                    @Html.TextBox("TextBoxFile", "", new { @type = "file", @class = "custom-file-input" }) <br />
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <span class="input-group-text previewTextBox" id="Preview_TextBox">Preview</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Import" class="btn btn-default" />
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+    }
 }
     <div id="bookWrapper">
         @* Inject form here *@
@@ -92,11 +95,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Text Book Details</h3>
-                            <a onclick="AddBook()">
-
-                                <i class="fa fa-book">Add Book</i>
-                            </a>
+                            @*<h3 class="card-title">Text Book Details</h3>*@
+                            <div>
+                                @*<button type="submit" >Save changes</button>*@
+                                <a onclick="AddBook()" class="btn btn-outline-secondary">
+                                    Add Book
+                                </a>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -111,6 +116,7 @@
                                         <th>Publisher</th>
                                         <th>Identifier</th>
                                         <th>Requirement</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -125,7 +131,10 @@
                                             <td>@customer.Publisher</td>
                                             <td>@customer.Identifier</td>
                                             <td>@customer.Requirement</td>
+                                            <td><a>
 
+    <i class="fa fa-fw fa-remove"> Remove</i>
+</a></td>
                                         </tr>
                                     }
                                 </tbody>

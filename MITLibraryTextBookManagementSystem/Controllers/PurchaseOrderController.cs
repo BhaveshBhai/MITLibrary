@@ -14,7 +14,7 @@ namespace MITLibraryTextBookManagementSystem.Controllers
         {
             return View(BookModel.GetPurchaseOrders());
         }
-        public ActionResult ExitingBook()
+        public ActionResult NewBookList()
         {
             return View(BookModel.GetNewBookPurchseOrders());
         }

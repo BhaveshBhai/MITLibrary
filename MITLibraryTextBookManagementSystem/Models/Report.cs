@@ -31,9 +31,12 @@ namespace MITLibraryTextBookManagementSystem.Models
                                  where iv.Inventor_FileUpload_Id == fileId && iv.Campus_Id == u.Campus_Id
                                  select iv).ToList();
                     List<Report> reports = new List<Report>();
-                    foreach (var item in books.DistinctBy(x=>x.OCLC_Number))
+                    foreach (var item in books
+    .GroupBy(m => new { m.UnitCode_Id, m.OCLC_Number })
+    .Select(group => group.First())  // instead of First you can also apply your logic here what you want to take, for example an OrderBy
+    .ToList())
                     {
-                        var Studentresult = db.StudentEnrollments.Where(x => x.UnitCode_Id == item.UnitCode_Id).FirstOrDefault();
+                        var Studentresult = db.StudentEnrollments.Where(x => x.UnitCode_Id == item.UnitCode_Id && x.StudentDetail_FileId==fileId).FirstOrDefault();
                         Report rp = new Report();
                         rp.Title = item.TextBook.Title;
                         rp.OCLC_Number = item.OCLC_Number.ToString();
@@ -45,23 +48,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                         rp.NeedOrder = (rp.AvaibleBook - rp.ActualRequiredBook) > 0 ? 0 : rp.AvaibleBook - rp.ActualRequiredBook;
                         reports.Add(rp);
                     }
-                    //                    var data = (from iv in db.AumltInventors.DistinctBy(x => x.Unit_Id)
-                    //                                join bk in db.TextBooks on iv.TextBookId equals bk.TextBook_Id
-                    //                                join c in db.Campuses on iv.Campus_Id equals c.Campus_id
-                    //                                join u in db.Units on iv.Unit_Id equals u.Unit_Id
-                    //                                where iv.Inventor_FileUpload_Id == fileId && u.Campus_Id==iv.Campus_Id
-                    //                                select new Report
-                    //                                {
-                    //                                    BookPublisher = bk.Publisher,
-                    //                                    CampusName = c.Campus_Name,
-                    //                                    OCLC_Number = iv.OCLC_Number.ToString(),
-                    //                                    UnitCode = u.Unit_Code,
-                    //                                    Title=bk.Title,
-                    //                                    AvaibleBook = db.AumltInventors.Where(x => x.OCLC_Number.ToString() == bk.Identifier).Count(),
-                    //                                    ActualRequiredBook = (int)(u.Total_Enrollment != 0 ? Math.Ceiling((double)u.Total_Enrollment / 10) + 2 : 0),
-                    //NeedOrder= (AvaibleBook-ActualRequiredBook)>0?0:AvaibleBook-ActualRequiredBook
-                    //                                }).ToList();
-                    //                    return data;
+                    
                     return reports;
                 }
             }

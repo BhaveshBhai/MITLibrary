@@ -272,11 +272,11 @@ namespace MITLibraryTextBookManagementSystem.Models
                         //            where uc.UnitCodeName == item.Unitcode
                         //            select st).FirstOrDefault();
                         var unitCode_Id = db.UnitCodes.Where(x => x.UnitCodeName == item.Unitcode).Select(x => x.UnitCodeId).FirstOrDefault();
-                        var unit = db.StudentEnrollments.Where(x => x.UnitCode_Id == unitCode_Id).FirstOrDefault();
+                        //var unit = db.StudentEnrollments.Where(x => x.UnitCode_Id == unitCode_Id).FirstOrDefault();
                        
-                        if (unit == null && unitCode_Id>0)
+                        if (unitCode_Id>0)
                         {
-                            unit = new StudentEnrollment();
+                           StudentEnrollment unit = new StudentEnrollment();
                             unit.Campus_Id = campusId;
                             unit.Capacity = string.IsNullOrEmpty(item.Capacity) ? 0 : Convert.ToInt32(item.Capacity);
                             unit.Lab_and_tut_capacity = string.IsNullOrEmpty(item.Lab_and_tut_capacity) ? 0 : Convert.ToInt32(item.Lab_and_tut_capacity);
