@@ -39,7 +39,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                         var Studentresult = db.StudentEnrollments.Where(x => x.UnitCode_Id == item.UnitCode_Id && x.StudentDetail_FileId==fileId).FirstOrDefault();
                         Report rp = new Report();
                         rp.Title = item.TextBook.Title;
-                        rp.OCLC_Number = item.OCLC_Number.ToString();
+                        rp.OCLC_Number =item.OCLC_Number!=null? item.OCLC_Number.ToString():null;
                         rp.UnitCode = item.UnitCode.UnitCodeName;
                         rp.BookPublisher = item.TextBook.Publisher.ToString();
                         rp.CampusName = item.Campus.Campus_Name;
