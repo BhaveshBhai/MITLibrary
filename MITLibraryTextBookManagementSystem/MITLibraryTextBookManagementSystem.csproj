@@ -163,7 +163,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\PurchaseOrderController.cs" />
+    <Compile Include="Controllers\AddBookRequestController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\StudentEnrollmentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -450,9 +450,9 @@
     <Content Include="Views\Report\GenerateResult.cshtml" />
     <Content Include="Views\User\_User.cshtml" />
     <Content Include="Views\StudentEnrollment\_AddBook.cshtml" />
-    <Content Include="Views\PurchaseOrder\Index.cshtml" />
-    <Content Include="Views\PurchaseOrder\NewBookList.cshtml" />
-    <Content Include="Views\PurchaseOrder\_PurchaseOrders.cshtml" />
+    <Content Include="Views\AddBookRequest\Index.cshtml" />
+    <Content Include="Views\AddBookRequest\NewBookList.cshtml" />
+    <Content Include="Views\AddBookRequest\_PurchaseOrders.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

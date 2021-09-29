@@ -114,5 +114,10 @@ namespace MITLibraryTextBookManagementSystem.Controllers
             }
             return RedirectToAction("Index");
         }
+        public ActionResult deleteBookDetails(int Id)
+        {
+            BookModel.RemoveBook(Id);
+            return RedirectToAction("Index");
+        }
     }
 }

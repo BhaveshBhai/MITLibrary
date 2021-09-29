@@ -7,7 +7,7 @@ using System.Web;
 
 namespace MITLibraryTextBookManagementSystem.Models
 {
-    public class PurchaseOrderModel
+    public class AddBookRequestModel
     {
         public int TextBook_Id { get; set; }
         [Required(ErrorMessage = "Year is required")]
@@ -30,30 +30,30 @@ namespace MITLibraryTextBookManagementSystem.Models
         public string UserName { get; set; }
         public int FileUploadId { get; set; }
         public int OrderId { get; set; }
-        public static void AddBookIntoTable(PurchaseOrderModel purchaseOrderModel)
+        public static void AddBookIntoTable(AddBookRequestModel AddBookRequestModel)
         {
             try
             {
                 using (var db = new MITDBContext())
                 {
-                    var bk = db.TextBooks.Where(x => x.TextBook_Id == purchaseOrderModel.TextBook_Id).FirstOrDefault();
-                    bk.Identifier = purchaseOrderModel.Identifier;
+                    var bk = db.TextBooks.Where(x => x.TextBook_Id == AddBookRequestModel.TextBook_Id).FirstOrDefault();
+                    bk.Identifier = AddBookRequestModel.Identifier;
                     db.TextBooks.Attach(bk);
                     db.Entry(bk).State = EntityState.Modified;
                     db.SaveChanges();
-                    var cpId = db.StudentEnrollments.Where(x => x.UnitCode_Id == purchaseOrderModel.Unit_Id).Select(x => x.Campus_Id).FirstOrDefault();
-                    for (int i = 0; i < purchaseOrderModel.ActualRequirment; i++)
+                    var cpId = db.StudentEnrollments.Where(x => x.UnitCode_Id == AddBookRequestModel.Unit_Id).Select(x => x.Campus_Id).FirstOrDefault();
+                    for (int i = 0; i < AddBookRequestModel.ActualRequirment; i++)
                     {
                         AumltInventor aumltInventor = new AumltInventor();
-                        aumltInventor.OCLC_Number =purchaseOrderModel.Identifier;
-                        aumltInventor.TextBookId = purchaseOrderModel.TextBook_Id;
-                        aumltInventor.UnitCode_Id = purchaseOrderModel.Unit_Id;
+                        aumltInventor.OCLC_Number =AddBookRequestModel.Identifier;
+                        aumltInventor.TextBookId = AddBookRequestModel.TextBook_Id;
+                        aumltInventor.UnitCode_Id = AddBookRequestModel.Unit_Id;
                         aumltInventor.Campus_Id = cpId;
-                        aumltInventor.Inventor_FileUpload_Id = purchaseOrderModel.FileUploadId;
+                        aumltInventor.Inventor_FileUpload_Id = AddBookRequestModel.FileUploadId;
                         db.AumltInventors.Add(aumltInventor);
                         db.SaveChanges();
 
-                        var order = db.Orders.Where(x => x.OrderId == purchaseOrderModel.OrderId).FirstOrDefault();
+                        var order = db.Orders.Where(x => x.OrderId == AddBookRequestModel.OrderId).FirstOrDefault();
                         order.OrderComplated = true;
                         order.UpdateDate = DateTime.Now;
                         db.Orders.Add(order);

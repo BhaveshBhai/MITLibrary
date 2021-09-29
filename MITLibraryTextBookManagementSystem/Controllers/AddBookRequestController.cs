@@ -7,12 +7,12 @@ using System.Web.Mvc;
 
 namespace MITLibraryTextBookManagementSystem.Controllers
 {
-    public class PurchaseOrderController : Controller
+    public class AddBookRequestController : Controller
     {
-        // GET: PurchaseOrder
+        // GET: AddBookRequest
         public ActionResult Index()
         {
-            return View(BookModel.GetPurchaseOrders());
+            return View(BookModel.lstReports());
         }
         public ActionResult NewBookList()
         {
@@ -20,12 +20,12 @@ namespace MITLibraryTextBookManagementSystem.Controllers
         }
         public ActionResult PurchaseRequest(int id, int? rq)
         {
-            return PartialView("_PurchaseOrders", BookModel.GetBook(id,rq));
+            return PartialView("_AddBookRequests", BookModel.GetBook(id,rq));
         }
         [HttpPost]
-        public ActionResult PurchaseOrderConform(PurchaseOrderModel textBook)
+        public ActionResult AddBookRequestConform(AddBookRequestModel textBook)
         {
-            PurchaseOrderModel.AddBookIntoTable(textBook);
+            AddBookRequestModel.AddBookIntoTable(textBook);
             return RedirectToAction("Index");
         }
     }

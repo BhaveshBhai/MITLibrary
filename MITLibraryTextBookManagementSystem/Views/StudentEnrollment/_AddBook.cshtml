@@ -1,10 +1,10 @@
 ﻿@model MITLibraryTextBookManagementSystem.Models.BookModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
 <div class="modal fade" id="modal-textbookAdd">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
         <div class="modal-content">
 
             <div class="modal-header">
@@ -104,4 +104,10 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-@Scripts.Render("~/bundles/jqueryval")  
+@Scripts.Render("~/bundles/jqueryval")
+<style>
+    .modal-body {
+        max-height: calc(100vh - 200px);
+        overflow-y: auto;
+    }
+</style>  

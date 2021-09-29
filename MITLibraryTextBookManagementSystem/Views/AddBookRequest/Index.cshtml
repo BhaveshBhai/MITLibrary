@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div id="PurchaseOrderLoad">
+<div id="AddBookRequestLoad">
     @* Inject form here *@
 </div>
 <table id="tblLstReport" class="table table-bordered table-striped">
@@ -51,10 +51,12 @@
                         @item.ActualRequiredBook
                     </td>
                     <td>
-                        <a onclick="GetNewPurchseOrders(@item.Id, @item.ActualRequiredBook)">
-
-                            <i class="fa fa-upload"></i>
-                        </a>
+                        @if ((@item.AvaibleBook - @item.ActualRequiredBook) != 0)
+                        {
+                            <a onclick="GetNewPurchseOrders(@item.Id, @item.ActualRequiredBook)">
+                                <i class="fa fa-upload"></i>
+                            </a>
+                        }
                     </td>
                 </tr>
             }
@@ -72,20 +74,20 @@
         }).buttons().container().appendTo('#tblLstReport_wrapper .col-md-6:eq(0)');
     });
     $(function () {
-        $('#modal-purchaseOrders').modal();
+        $('#modal-AddBookRequests').modal();
     });
 
     function GetNewPurchseOrders(id, rq) {
         $.ajax({
-            url: "/PurchaseOrder/PurchaseRequest",
+            url: "/AddBookRequest/PurchaseRequest",
             typr: "GET",
             data: {
                 id: id,
                 rq: rq
             },
             success: function (response) {
-                $('#PurchaseOrderLoad').html(response);
-                $('#modal-purchaseOrders').modal('show');
+                $('#AddBookRequestLoad').html(response);
+                $('#modal-AddBookRequests').modal('show');
             },
             error: function (response) {
                 alert(response.responseText);

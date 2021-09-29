@@ -1,9 +1,9 @@
-﻿@model MITLibraryTextBookManagementSystem.Models.PurchaseOrderModel
+﻿@model MITLibraryTextBookManagementSystem.Models.AddBookRequestModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="modal fade" id="modal-purchaseOrders">
+<div class="modal fade" id="modal-AddBookRequests">
     <div class="modal-dialog">
         <div class="modal-content">
 
@@ -13,7 +13,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            @using (Html.BeginForm("PurchaseOrderConform", "PurchaseOrder", FormMethod.Post))
+            @using (Html.BeginForm("AddBookRequestConform", "AddBookRequest", FormMethod.Post))
             {
                 @Html.AntiForgeryToken()
                 <div class="modal-body">
