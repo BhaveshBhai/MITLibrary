@@ -122,20 +122,17 @@
                                 <tbody>
                                     @foreach (TextBook customer in Model)
                                     {
-                                        <tr>
-                                            <td>@customer.UnitCode.UnitCodeName</td>
-                                            <td>@customer.Coordinator_Name</td>
-                                            <td>@customer.Author</td>
-                                            <td>@customer.TextBook_Year</td>
-                                            <td>@customer.Title</td>
-                                            <td>@customer.Publisher</td>
-                                            <td>@customer.Identifier</td>
-                                            <td>@customer.Requirement</td>
-                                            <td><a>
-
-    <i class="fa fa-fw fa-remove"> Remove</i>
-</a></td>
-                                        </tr>
+                                    <tr>
+                                        <td>@customer.UnitCode.UnitCodeName</td>
+                                        <td>@customer.Coordinator_Name</td>
+                                        <td>@customer.Author</td>
+                                        <td>@customer.TextBook_Year</td>
+                                        <td>@customer.Title</td>
+                                        <td>@customer.Publisher</td>
+                                        <td>@customer.Identifier</td>
+                                        <td>@customer.Requirement</td>
+                                        <td width="20%"><a href="#" class="btn btn-danger" onclick="ConfirmDelete(@customer.TextBook_Id)"><i class="glyphicon glyphicon-trash"></i> </a> </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>
@@ -145,7 +142,53 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Delete Book</h3>
+                </div>
+                <div class="modal-body">
+                    <h4>Are you sure you want to Remove this Book?</h4>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <a href="#" class="btn btn-success" onclick="DeleteBook()">Confirm</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <input type="hidden" id="hiddenBookId" />
     <script>
+        var ConfirmDelete = function (EmployeeId) {
+            $("#hiddenBookId").val(EmployeeId);
+            $("#myModal").modal('show');
+        }
+        var DeleteBook = function () {
+            var bkId = $("#hiddenBookId").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/StudentEnrollment/deleteBookDetails",
+                data: { Id: bkId },
+                success: function (result) {
+
+                    $("#myModal").modal("hide");
+                    $("#row_" + bkId).remove();
+
+                }
+            })
+
+        }
+
         $(function () {
 
             $("#tbllstUnits").DataTable({

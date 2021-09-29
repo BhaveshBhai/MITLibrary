@@ -89,15 +89,15 @@ namespace MITLibraryTextBookManagementSystem.Models
                     order.FileId = stFieldId.StudentDetail_FileId;
                     db.Orders.Add(order);
                     db.SaveChanges();
-                    AumltInventor aumltInventor = new AumltInventor();
-                    aumltInventor.Inventor_FileUpload_Id = stFieldId.StudentDetail_FileId;
-                    aumltInventor.OCLC_Number = textBook.Identifier;
-                    aumltInventor.TextBookId = textBook.TextBook_Id;
-                    aumltInventor.UnitCode_Id = bookModel.Unit_Id;
+                    //AumltInventor aumltInventor = new AumltInventor();
+                    //aumltInventor.Inventor_FileUpload_Id = stFieldId.StudentDetail_FileId;
+                    //aumltInventor.OCLC_Number = textBook.Identifier;
+                    //aumltInventor.TextBookId = textBook.TextBook_Id;
+                    //aumltInventor.UnitCode_Id = bookModel.Unit_Id;
 
-                    aumltInventor.Campus_Id = stFieldId.Campus_Id;
-                    db.AumltInventors.Add(aumltInventor);
-                    db.SaveChanges();
+                    //aumltInventor.Campus_Id = stFieldId.Campus_Id;
+                    //db.AumltInventors.Add(aumltInventor);
+                    //db.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -128,7 +128,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                                     var Studentresult1 = db.StudentEnrollments.Where(x => x.UnitCode_Id == item1.UnitCode_Id).FirstOrDefault();
                                     Report rp = new Report();
                                     rp.Title = item.TextBook.Title;
-                                    rp.OCLC_Number = item1.OCLC_Number.ToString();
+                                    rp.OCLC_Number = item1.OCLC_Number;
                                     rp.UnitCode = item.UnitCode.UnitCodeName;
                                     rp.BookPublisher = item.TextBook.Publisher.ToString();
                                     rp.CampusName = item1.Campus.Campus_Name;
@@ -172,7 +172,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                             var Studentresult1 = db.StudentEnrollments.Where(x => x.UnitCode_Id == item1.UnitCode_Id).FirstOrDefault();
                             Report rp = new Report();
                             rp.Title = item.TextBook.Title;
-                            rp.OCLC_Number = item1.OCLC_Number.ToString();
+                            rp.OCLC_Number = item1.OCLC_Number;
                             rp.UnitCode = item.UnitCode.UnitCodeName;
                             rp.BookPublisher = item.TextBook.Publisher.ToString();
                             rp.CampusName = item1.Campus.Campus_Name;
@@ -262,6 +262,35 @@ namespace MITLibraryTextBookManagementSystem.Models
             catch (Exception ex)
             {
                 return null;
+            }
+        }
+        public static void RemoveBook(int bookId)
+        {
+            try
+            {
+                using (var db = new MITDBContext())
+                {
+                    var or = db.Orders.Where(x => x.TextBook_Id == bookId).ToList();
+                    if (or != null)
+                    {
+                        db.Orders.RemoveRange(or);
+                        db.SaveChanges();
+                    }
+                    var al = db.AumltInventors.Where(x => x.TextBookId == bookId).ToList();
+                    if (al != null)
+                    {
+                        db.AumltInventors.RemoveRange(al);
+                        db.SaveChanges();
+                    }
+                    var textbook = db.TextBooks.Where(x => x.TextBook_Id == bookId).FirstOrDefault();
+                    db.TextBooks.Remove(textbook);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
         }
     }
