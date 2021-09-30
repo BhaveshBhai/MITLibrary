@@ -17,13 +17,16 @@ namespace MITLibraryTextBookManagementSystem.Models
             SelectList lstobj = null;
             try
             {
+
                 using (MITDBContext db = new MITDBContext())
                 {
-                    var list = db.FileUploads.Select(x => new SelectListItem
+                    List<SelectListItem> list = new List<SelectListItem>();
+                    var files = db.FileUploads.Select(x => new SelectListItem
                     {
                         Value = x.File_Upload_Id.ToString(),
                         Text = x.File_Name
-                    }).ToList();
+                    }).OrderByDescending(x=>x.Value).FirstOrDefault();
+                    list.Add(files);
                     lstobj = new SelectList(list, "Value", "Text");
                 }
                 return lstobj;

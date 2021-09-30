@@ -1,0 +1,59 @@
+﻿@using MITLibraryTextBookManagementSystem.Models;
+@model IEnumerable<MITLibraryTextBookManagementSystem.Models.OrderViewModel>
+
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Activity Details</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="tbllstActivity" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>User Name</th>
+                                    <th>Book Title</th>
+                                    <th>Book Publisher</th>
+                                    <th>Author</th>
+                                    <th>
+                                        Date
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (OrderViewModel user in Model)
+                                {
+                                    <tr>
+                                        <td>@user.UserName</td>
+                                        <td>@user.BookTitle</td>
+                                        <td>@user.BookPublisher</td>
+                                        <td>@user.Author</td>
+                                        <td>
+                                            @user.DateTime
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    $(function () {
+
+        $("#tbllstActivity").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+            /* "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]*/
+        }).buttons().container().appendTo('#tbllstActivity_wrapper .col-md-6:eq(0)');
+    });
+    $(function () {
+        $('#modal-User').modal();
+    });
+    </script>?
