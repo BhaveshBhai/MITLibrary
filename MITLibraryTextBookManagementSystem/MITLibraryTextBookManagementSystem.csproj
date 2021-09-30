@@ -164,6 +164,7 @@
     <Compile Include="Controllers\FileUploadController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AddBookRequestController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ReportController.cs" />
     <Compile Include="Controllers\StudentEnrollmentController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Models\ImportUnit.cs" />
     <Compile Include="Models\MITDBContext.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\PurchaseOrderModel.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\Role.cs" />
@@ -453,6 +455,7 @@
     <Content Include="Views\AddBookRequest\Index.cshtml" />
     <Content Include="Views\AddBookRequest\NewBookList.cshtml" />
     <Content Include="Views\AddBookRequest\_PurchaseOrders.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
