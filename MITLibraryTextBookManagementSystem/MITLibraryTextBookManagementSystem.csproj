@@ -454,7 +454,7 @@
     <Content Include="Views\StudentEnrollment\_AddBook.cshtml" />
     <Content Include="Views\AddBookRequest\Index.cshtml" />
     <Content Include="Views\AddBookRequest\NewBookList.cshtml" />
-    <Content Include="Views\AddBookRequest\_PurchaseOrders.cshtml" />
+    <Content Include="Views\AddBookRequest\_AddBookRequests.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

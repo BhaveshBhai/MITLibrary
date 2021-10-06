@@ -30,7 +30,6 @@ namespace MITLibraryTextBookManagementSystem.Models
                     var lstreports = (from tb in db.TextBooks
                               join St in db.StudentEnrollments on tb.UnitCode_Id equals St.UnitCode_Id
                               where St.StudentDetail_FileId == fileId 
-                            
                               select new Report
                               {
                                   BookPublisher = tb.Publisher,

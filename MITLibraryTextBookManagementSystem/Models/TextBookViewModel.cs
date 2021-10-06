@@ -369,7 +369,7 @@ namespace MITLibraryTextBookManagementSystem.Models
             {
                 using (var db = new MITDBContext())
                 {
-                    return db.TextBooks.Include("UnitCode").ToList();
+                    return db.TextBooks.Include("UnitCode").Where(x=>x.Identifier!=null).ToList();
                 }
             }
             catch (Exception ex)

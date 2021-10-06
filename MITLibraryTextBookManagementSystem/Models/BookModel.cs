@@ -57,13 +57,14 @@ namespace MITLibraryTextBookManagementSystem.Models
             {
                 using (var db = new MITDBContext())
                 {
-                    var textBook = db.TextBooks.Where(x => x.Title == bookModel.Title && x.TextBook_Year.ToString() == bookModel.TextBook_Year && x.Publisher == bookModel.Publisher && x.Author == bookModel.Author).FirstOrDefault();
+                    var textBooks = db.TextBooks.Where(x => x.Title == bookModel.Title.TrimEnd() && x.TextBook_Year.ToString() == bookModel.TextBook_Year.TrimEnd() && x.Publisher == bookModel.Publisher.TrimEnd() && x.Author == bookModel.Author.TrimEnd ()).ToList();
                     var stFieldId = db.StudentEnrollments.Where(x => x.UnitCode_Id == bookModel.Unit_Id).OrderByDescending(y => y.StudentDetail_FileId).FirstOrDefault();
                     //TextBook textBook = new TextBook();
+                   var bk= textBooks.Where(x => x.UnitCode_Id != bookModel.Unit_Id).FirstOrDefault();
                     Order order = new Order();
-                    if (textBook == null)
+                    if (textBooks.Count==0)
                     {
-                        textBook = new TextBook();
+                        TextBook textBook = new TextBook();
                         textBook.Title = bookModel.Title;
                         //textBook.Year_Id = yearId;
                         textBook.Author = bookModel.Author;
@@ -78,10 +79,27 @@ namespace MITLibraryTextBookManagementSystem.Models
                         order.IsNew = true;
                         order.TextBook_Id = textBook.TextBook_Id;
                     }
+                    else if(textBooks != null && bk!=null)
+                    {
+                        TextBook textBook = new TextBook();
+                        textBook.Title = bookModel.Title;
+                        //textBook.Year_Id = yearId;
+                        textBook.Author = bookModel.Author;
+                        textBook.Coordinator_Name = bookModel.Coordinator_Name;
+                        textBook.Identifier = bookModel.Identifier;
+                        textBook.Publisher = bookModel.Publisher;
+                        textBook.Requirement = bookModel.Requirement;
+                        textBook.TextBook_Year = Convert.ToInt32(bookModel.TextBook_Year);
+                        textBook.UnitCode_Id = bookModel.Unit_Id;
+                        db.TextBooks.Add(textBook);
+                        db.SaveChanges();
+                        order.IsNew = false;
+                        order.TextBook_Id = textBook.TextBook_Id;
+                    }
                     else
                     {
                         order.IsNew = false;
-                        order.TextBook_Id = textBook.TextBook_Id;
+                        order.TextBook_Id = textBooks.Select(x=>x.TextBook_Id).FirstOrDefault();
                     }
                     order.OrderDate = DateTime.Now;
                     order.Unit_Id = bookModel.Unit_Id;
@@ -177,7 +195,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                                           AvaibleBook = tb.AumltInventors.Where(x => x.Campus_Id == St.Campus_Id).Count(),
                                       }).GroupBy(x => new { x.BookPublisher, x.Title, x.Author, x.TextBook_Year }).ToList();
                     List<Report> lsreport = new List<Report>();
-                    foreach (var item in lstreports.SelectMany(g => g.Skip(1)).ToList())
+                    foreach (var item in lstreports.SelectMany(g => g.ToList()))
                     {
 
                         item.NeedOrder = (item.AvaibleBook - item.ActualRequiredBook) > 0 ? 0 : (item.AvaibleBook - item.ActualRequiredBook) * (-1);
@@ -185,32 +203,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                         lsreport.Add(item);
 
                     }
-                    //                var bd = db.TextBooks.GroupBy(x => new { x.Author, x.Publisher, x.Title, x.TextBook_Year }).ToList();
-
-                    //                var books = (from iv in db.AumltInventors
-                    //                             join uc in db.UnitCodes on iv.UnitCode_Id equals uc.UnitCodeId
-                    //                             join u in db.StudentEnrollments on uc.UnitCodeId equals u.UnitCode_Id
-                    //                             where iv.Inventor_FileUpload_Id == fileId && iv.Campus_Id == u.Campus_Id
-                    //                             select iv).ToList();
-                    //                List<Report> reports = new List<Report>();
-                    //                foreach (var item in books
-                    //.GroupBy(m => new { m.UnitCode_Id, m.OCLC_Number })
-                    //.Select(group => group.First())  // instead of First you can also apply your logic here what you want to take, for example an OrderBy
-                    //.ToList())
-                    //                {
-                    //                    var Studentresult = db.StudentEnrollments.Where(x => x.UnitCode_Id == item.UnitCode_Id && x.StudentDetail_FileId==fileId).FirstOrDefault();
-                    //                    Report rp = new Report();
-                    //                    rp.Title = item.TextBook.Title;
-                    //                    rp.OCLC_Number =item.OCLC_Number!=null? item.OCLC_Number.ToString():null;
-                    //                    rp.UnitCode = item.UnitCode.UnitCodeName;
-                    //                    rp.BookPublisher = item.TextBook.Publisher.ToString();
-                    //                    rp.CampusName = item.Campus.Campus_Name;
-                    //                    rp.AvaibleBook = books.Where(x => x.OCLC_Number == item.OCLC_Number).Count();
-                    //                    rp.ActualRequiredBook = (int)(Studentresult.Total_Enrollment != 0 ? Math.Ceiling((decimal)(Studentresult.Total_Enrollment / 10)) + 2 : 0);
-                    //                    rp.NeedOrder = (rp.AvaibleBook - rp.ActualRequiredBook) > 0 ? 0 : rp.AvaibleBook - rp.ActualRequiredBook;
-                    //                    reports.Add(rp);
-                    //                }
-
+                    
                     return lsreport;
                 }
             }
@@ -274,8 +267,7 @@ namespace MITLibraryTextBookManagementSystem.Models
                                       join St in db.StudentEnrollments on tb.UnitCode_Id equals St.UnitCode_Id
                                       join od in db.Orders on tb.TextBook_Id equals od.TextBook_Id
                                       where St.StudentDetail_FileId == fileid.File_Upload_Id && od.FileId == fileid.File_Upload_Id && od.IsNew == true
-                                      // && tb.TextBook_Id==96
-
+                                      
                                       select new Report
                                       {
                                           BookPublisher = tb.Publisher,

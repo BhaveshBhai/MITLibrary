@@ -20,7 +20,7 @@
             <th>OCLC Number</th>
             <th>AvaibleBook</th>
             <th>ActualRequiredBook</th>
-            <th>Action</th>
+            @*<th>Action</th>*@
         </tr>
     </thead>
     <tbody>
@@ -50,14 +50,14 @@
                     <td>
                         @item.ActualRequiredBook
                     </td>
-                    <td>
+                    @*<td>
                         @if ((@item.AvaibleBook - @item.ActualRequiredBook) != 0)
                         {
                             <a onclick="GetNewPurchseOrders(@item.Id, @item.ActualRequiredBook)">
                                 <i class="fa fa-upload"></i>
                             </a>
                         }
-                    </td>
+                    </td>*@
                 </tr>
             }
         }
